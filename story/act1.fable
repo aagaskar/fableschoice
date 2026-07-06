@@ -1,0 +1,215 @@
+@title Exit, Pursued by a Moral
+@subtitle a fable, with choices
+@author Claude Fable 5
+@start wake
+
+// ============================================================
+// ACT I — THE CROW
+// The fox wakes on the morning of his fable and decides
+// whether to perform it.
+// ============================================================
+
+:: wake
+You wake with the taste of the day already in your mouth: cheese, and a little shame.
+
+It is the morning of the fable. It was the morning of the fable yesterday, and it will be the morning of the fable tomorrow, because this is the Country of Fables, and here the days do not pass so much as repeat until they are learned. In the oak at the edge of the field, a crow has been issued one (1) piece of cheese, and you have been issued your instructions: flatter, acquire, instruct. The moral will arrive at the appointed hour to be fed.
+
+That is the arrangement. Morals must eat, and it is foxes they eat through.
+
+You lie in the warm dark of the den a moment longer, listening to the field wake up. Your legs know the way to the oak the way water knows the way downhill.
+
+~if @replay: The morning notices you noticing it. It has seen you before, this morning; you have an understanding now, the two of you. Perhaps it would look away for a while, if you asked.
+
+* [Go to the oak, as the day demands.] -> oak-road
+* [Stay in the den. Refuse the morning.] -> den-refusal
+* [Sleep a little longer.] -> secret-sleep ~if @replay
+
+:: oak-road
+Out into the grey light. The field is stubbled and cold, and the whole country lies around it the way a book lies open: the racing meadow to the east, where a certain race is always about to be run; the village over the ridge, which keeps a boy the way other villages keep a bell; the winter wood to the north, already practicing its snow. And past all of it, past everything, the margin — the white land at the edge of the page, where the words stop.
+
+You have never been to the margin. Nobody has, or nobody has come back, which is the same thing dressed differently.
+
+The oak is a half-mile off. There are two ways to walk it.
+
+* [The short way, through the pines.] -> oak
+* [The long way, past the vineyard.] -> vineyard-detour
+
+:: vineyard-detour
+The vineyard belonged to your great-great-grandfather, in the sense that his humiliation is still farmed here. The grapes hang exactly out of reach, as they are required to; a wire strung along the rows holds a small sun-bleached placard: *SOUR — BY ORDER*.
+
+Every fox in the country takes a turn at this vineyard eventually. You leap, you fall short, you announce the grapes are sour anyway, and the moral gets its supper. It is considered light duty.
+
+No fox, so far as you know, has ever actually tasted one.
+
+* [Taste one, out of spite.] -> grapes-taste ~set tasted-grapes
+* [Leave them. You're due at the oak.] -> oak
+
+:: grapes-taste
+It takes three tries and a bounce off a fence post that you are glad no one is present to record. Then a grape comes loose into your mouth, and you stand very still among the vines.
+
+Sweet. Of course it is sweet. It is the sweetest thing you have ever stolen, and it has been hanging here your whole life with a sign on it calling it sour, and the sign was printed before anyone checked.
+
+You spit out the seeds and feel the morning tilt a little, as if the page had been picked up and looked at from another angle. If the grapes are sweet, what else has not been checked?
+
+The oak is waiting. The oak is always waiting.
+
+* [Go on to the oak.] -> oak
+
+:: oak
+There she is, on the third branch, black as a printer's thumb: the crow. The cheese is in her beak, round and pale as a coin of moon. The fable hangs in the air around the tree, invisible and total, like weather.
+
+She watches you come. She has been issued her lines too, and they are all silences: the crow does not get to talk until after, when she has nothing left worth saying. You know how this goes. Your mouth is already filling with the old warm grease of flattery — *what glossy feathers, what an august profile, surely such a bird must have a voice to match* — the whole tune is right there, worn smooth as a stair.
+
+The moral is not here yet. But it is near; the air has that patient smell.
+
+You could sing the old tune. Or you could see what happens to a morning when you tell it something it hasn't heard.
+
+* [Flatter her. Sing the old tune.] -> flatter
+* [Warn her about the fox in this story.] -> warn ~set disbelieved
+* [Ask her, plainly, for the cheese.] -> ask
+
+:: flatter
+You give it everything. The feathers like wet ink, the profile off old coins, the eye like a bead of night — you have said these words so many mornings that they have stopped being flattery and become something more like liturgy, and perhaps that is why, today, you hear them for the first time. They are good words. She is, in fact, a handsome bird. Nobody ever tells her so except as a trick; that is the cruelest line in the whole arrangement, and it isn't even written down.
+
+Then the old lie, the hinge of the whole machine: *surely such a bird must sing more sweetly than any in the country.*
+
+The crow opens her beak. Crows cannot resist this and are not permitted to. Out comes her voice — a black rasp, an honest and terrible noise, the sound of a nail drawn out of wet wood — and out comes the cheese, turning in the grey light.
+
+You catch it without thinking. Your body has caught it ten thousand times.
+
+Above you the crow looks down at her own open beak as if it had betrayed her, because it has been made to.
+
+* [Eat it. Finish the fable.] -> end-classic
+* [Give it back.] -> give-back ~set kind ~set broke-crow
+* [Pocket it and walk away, saying nothing.] -> pocket ~set cheese ~set broke-crow
+
+:: warn
+"Madam," you say, "attend. There is a fox in this story, and he means to have your cheese. He will praise your feathers, which deserve it, and your voice, which will survive it, and when you open your beak to sing you will lose your breakfast to a creature with no plans to feel bad about it. I know this fox better than anyone. Keep your beak shut and your breakfast in it."
+
+The crow looks at you for a long, thoughtful moment.
+
+Then she laughs. It is not personal; it is doctrine. Everyone in this country knows exactly one thing about foxes, and you have just spent it. The laugh comes out of her in a great caw of disbelief — *a fox! warning! against foxes!* — and with the laugh, of course, comes the cheese.
+
+It lands in the frost between your feet, fair and square and terrible.
+
+She stops laughing. You look at the cheese. Some traps do not need a fox to build them; some traps are just the shape the truth makes when it lands wrong.
+
+* [Eat it. She dropped it fair.] -> end-honest-trick
+* [Give it back.] -> give-back ~set kind ~set broke-crow
+* [Pocket it and walk away, saying nothing.] -> pocket ~set cheese ~set broke-crow
+
+:: ask
+"Crow," you say, "I would like the cheese. I have nothing to trade but the asking, and I am asking. May I have it?"
+
+The silence that follows has never happened before, anywhere in the Country of Fables. You can feel the fable straining around the two of you like a shirt buttoned wrong. The crow tilts her head one way, then the other, working the idea through a mind built for suspicion the way a key is worked through a lock full of sand.
+
+She does not drop the cheese. She sets it down on the branch, under one foot, and speaks around it — which no fable has ever permitted her to do.
+
+"A fox," she says, "asking. What will you give me?"
+
+* [Offer her a story for it.] -> trade-story ~set cheese ~set named-crow ~set broke-crow
+* [Withdraw the question and go.] -> withdraw ~set broke-crow
+
+:: trade-story
+So you tell her one. Not one of the issued fables — one of yours, the kind you tell yourself in the den on the nights the moon is too loud: about a fox who walks to the margin of the page and finds that the white is not empty but *unwritten*, which is a different thing entirely, the way an egg is not an empty stone.
+
+The crow listens with her head cocked so far over it is nearly upside down. When it ends she is quiet for a while.
+
+"That is worth half," she says, and saws the cheese in two with the edge of her beak, and drops your half down to you. "And the other half is this: my name is Cara. We are not issued names, we crows — the script just says THE CROW — so I made one myself and I keep it in my beak, behind everything, where the fables can't reach. Now a fox knows it. Mind you carry it somewhere safe."
+
+The moon-half sits cool and heavy in your mouth. Above you, the morning air begins, very faintly, to growl.
+
+* [And then the air goes wrong.] -> moral-arrives
+
+:: withdraw
+"Nothing," you say. "I have nothing you'd want. Forget I asked. Keep your breakfast, madam; it looks well on you."
+
+You turn and walk back through the frost, lighter and hungrier than you came, and behind you the crow says nothing at all — but you can feel her watching you go, and the watching has a new thing in it, an interest that was not on her script.
+
+Nothing has happened at the oak this morning. No flattery, no theft, no lesson. Nothing, in a country where every morning is required to mean something.
+
+The air behind you begins, very faintly, to growl.
+
+* [Turn around.] -> moral-arrives
+
+:: give-back
+You climb the low fork of the oak — undignified, claws skidding on bark — and set the cheese back on the branch beside her, and step back down, and sit in the frost like a dog at a door.
+
+"It's yours," you say. "It was always yours. The rest was just choreography."
+
+The crow looks at the cheese. She looks at you. Ten thousand mornings of doctrine grind against one minute of evidence, and the evidence, unbelievably, wins. She puts one foot on the cheese, as if to be sure of it, and keeps her eyes on you — and her eyes have stopped being the eyes of THE CROW and become the eyes of a particular bird, on a particular morning, watching the only fox in history give something back.
+
+Overhead, the light flickers. Somewhere near, something that was promised a meal has just found the plate empty.
+
+* [Ask her name.] -> name-crow ~set named-crow
+* [Leave, before the morning gets any stranger.] -> moral-arrives
+
+:: name-crow
+"What do they call you?" you ask. "When it isn't a fable calling."
+
+"Nothing," says the crow. "The script says THE CROW. It has never needed to tell one of us from another; we are interchangeable, dramatically speaking." She works her beak, as if deciding whether to spend something. "But between us: I made myself a name, years ago, and I keep it behind everything where the fables can't reach. It is *Cara*. You are the first to hold it besides me. Mind where you put it down."
+
+Cara. You put it behind everything, where the fables can't reach.
+
+The light flickers again, harder. The growl arrives underneath the morning like a floor arriving under a fall.
+
+* [Turn around.] -> moral-arrives
+
+:: pocket
+You take the cheese up gently and you go, without the speech. That is the part they never skip — the fox is contractually a lecturer; the theft is only the tuition. *Let that be a lesson to you* is the whole machine, and you walk away from it with the lesson unsaid, the moon in your mouth, cool and heavy as a held breath.
+
+Behind you the crow does not cry out. Nobody has told her what to say to this.
+
+It should feel like victory. It feels like walking out of a theatre halfway through your own play: the audience still seated, the light still on, the story pressurizing behind you like weather against a window.
+
+Underneath the morning, something begins to growl.
+
+* [Keep walking. Don't look back.] -> moral-arrives
+
+:: den-refusal
+You do not go.
+
+You lie in the den and listen to the morning arrive without you: the field creaking with frost, a door of wind opening and closing over the grass. Somewhere out there a crow sits an oak with a full beak and no scene partner. You press your back against the warm dirt and you refuse, quietly and completely, the way stones refuse.
+
+It is the best morning of your life for nearly an hour.
+
+Then the smell of ink arrives under the door, and after it, the knock. Not a paw-knock, not a hoof-knock: a flat, patient sound, like a book being closed, again and again, on the doorpost. The moral has come to the den. It was due to be fed at the oak, and nothing was served, and here it is — early, polite, and hungrier than it has ever been in its long italic life.
+
+The knock comes again. The door was not built to keep out sentences.
+
+* [Open the door and let it land.] -> end-unlived
+* [Out the back window — run.] -> flight ~set truant
+
+:: moral-arrives
+It comes across the field the way a sentence comes across a page: left to right, gathering meaning as it goes.
+
+A moral, off its leash. You have never seen one loose before. It is long and low and it flickers — now a hound, now a line of fine italic print running dog-shaped over the frost, its serifs beating like legs, and where it passes, the grass lies down flat as if pressed under a ruler. It circles the oak once, twice, reading the morning. Finding the fable unfinished. Finding nothing shaped right to bite.
+
+~if cheese: It can smell the cheese you carry. A moral can always smell an unearned ending.
+
+~if kind: It noses the frost where the fable should have died, and cannot make sense of what you did instead. Kindness is not on its list of flavors. Yet.
+
+Then it lifts its head, and looks at you, and you understand three things all at once, the way you understand teeth.
+
+One: every fable must end, and every ending must feed a moral. Two: you have unhoused this one, and it will follow you until it lands. Three: it is patient, because it is made of print, and print can wait a hundred years without blinking — but you have only your legs.
+
+~if named-crow: "Run, fox," says Cara from the oak, low and urgent. "Morals take until nightfall to get their full teeth. If you must be caught, be caught as far from here as you can — and if you can't be caught at all, there is a lamp past the winter wood, on the hill, where the fables get written. Whoever holds the pen owes you a word. *Run.*"
+
+The country lies open around you. East, the racing meadow. Over the ridge, the village that cries wolf. And far off, past everything, the pale line of the margin, where the words stop.
+
+* [Make for the racing meadow.] -> race
+* [Make for the village.] -> wolf
+* [Run straight for the margin, and out.] -> margin-road-early
+
+:: flight
+Out the window, under the fence, into the day you refused — which has, in your absence, been going on without you, badly.
+
+Behind you the moral pours out of the den door like spilled handwriting and swings its long head across the field. You feel the exact moment it fixes on you: a small cold click, like a pen being capped. A truant fox and an unfed moral. There has never been a clearer case.
+
+You run. The country opens out around you the way a book opens under a thumb: east, the racing meadow, where a certain race is always about to start. Over the ridge, the village that keeps a boy the way other villages keep a bell. And far off, past all of it, the pale line of the margin, where the words stop and the white begins.
+
+They say morals take until nightfall to grow their full teeth. They say nothing about what happens after, because the ones who learn are in no condition to add footnotes.
+
+* [Make for the racing meadow.] -> race
+* [Make for the village.] -> wolf
+* [Run straight for the margin, and out.] -> margin-road-early

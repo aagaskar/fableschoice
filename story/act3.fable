@@ -1,0 +1,148 @@
+// ============================================================
+// ACT III — NIGHTFALL
+// The pack assembles. Three doors out of the country:
+// the teeth, the white, the pen.
+// ============================================================
+
+:: crossroads
+Past the wood the land opens into high bare heath, and here the night finishes arriving. It comes up out of the ground the way water comes into a footprint, and with it, behind you, at reading pace, comes everything you have unhoused today.
+
+You stop on the rise and look back, because a fox should count what's chasing it.
+
+Your own moral leads — the crow's, the original, first out and leanest, its print gone sharp as wire from the day's fasting.
+
+~if broke-race: Behind it, the meadow's old sentence, no longer plump: the miles have carved it down to its clauses, and it runs with the terrible lightness of something rediscovering its purpose.
+
+~if fraud: And the crooked one, scuttling sideways in little rushes, its serifs curled like burnt paper. The others leave a space around it. Even sentences have standards.
+
+~if broke-wolf: The lean righteous one from the village travels at the pack's edge, still muttering LIAR in small caps, spending it on everyone by turns like a coin it can't get rid of.
+
+~if broke-winter: And the old moral of thrift, hindmost, hungriest, its small-print gone nearly transparent — a sentence starving into a rumor of itself, and angrier for every ounce it loses.
+
+~if passed-by: Somewhere under all of it, faint as frost forming, you can still hear the fiddle. It has followed you further than the wood is wide. Some music is a creditor.
+
+~if tame-moral: And against your neck, the small warm comma stirs and settles, toothless and certain, riding you the way an ember rides a log — patient about the fire it intends to be.
+
+Their teeth are in now. You can hear it in their gait — nothing hunts as levelly as a finished sentence.
+
+The heath offers three directions, the way it has been waiting all day to.
+
+West: the margin, a pale line under the first stars, where the words stop.
+
+North: the hill, and on it the lamp, where the fables get written.
+
+Or: here. The oldest option there is. Stop running, turn around, and see what your ending actually is, instead of being told.
+
+* [West. The margin. Out of the book entirely.] -> margin-approach
+* [North. The lamp. Whoever writes this owes you a word.] -> hill-road
+* [Stop. Turn. Face them.] -> face
+
+:: face
+You stop.
+
+It takes the pack a moment to believe it. Pursuit is a machine with two parts, and you have downed tools; the whole engine stumbles. They spill to a halt in a wide crescent on the frost, a parliament of sentences, breathing print, and your own lean one steps out ahead — first in, as is proper. This close, you can read yourself in its flank, the whole doctrine in fine italic: *the fox flatters, the fox takes, the fox teaches, let that be a lesson.*
+
+"Well," you say, and your voice only shakes in the middle. "Land, then. But land *looking at me*. I am not the fox on your flank. I am the fox who checked."
+
+~if tame-moral: Against your neck, the small warm comma uncurls. It drifts down from your ruff and takes up a position between you and the pack — a curl of light the size of a breath, facing down a crescent of teeth. The pack's leader lowers its long head to read this new thing, and its print stutters. It has never met a moral it couldn't parse.
+
+* [Let the small one speak for you.] -> end-rewrite ~if tame-moral
+* [Kneel in the frost and let them land.] -> end-caution
+
+:: margin-approach
+The last mile to the margin is downhill in every sense.
+
+The words run out gradually, and then all at once. First the land loses its adjectives — plain ground, plain dark, a sky with weather in it that can no longer say which. Then the nouns start to go: you pass a final tree, and behind it a final *something*, and after that the ground is just ground the way an unmarked key is a key. The pack's gait falters, back there. Print does not like it here; the white pulls at their serifs like current.
+
+And then you are at the edge, and there is no cliff and no wall. There is simply the last of the written world — one final stand of frost-stiff grass, one stone, described once, briefly — and beyond it the white.
+
+Not empty. You were right, that night in the den, telling it to yourself: not empty. *Unwritten.* It hums with everything it isn't yet. Looking into it is like looking into a snowfall that hasn't started, into the pause before an answer, into paper the pen hasn't reached — and it does not gape, it *waits*, and it is the only thing in the Country of Fables that has never once told you what you are.
+
+One step. Behind you, teeth. To the north, small on its hill, the lamp.
+
+~if named-crow: And you are carrying, behind everything where the fables can't reach, a name that was given to you for safekeeping. Whatever crosses this line keeps nothing it cannot carry itself — but a name is light. A name would fit in a mouth.
+
+* [Call her name into the white, and step through.] -> end-margin-unwritten ~if named-crow
+* [Step through alone.] -> end-margin-erased
+* [Turn back — north, toward the lamp.] -> hill-road
+
+:: hill-road
+The hill is longer than it looked, the way hills with lamps on them always are.
+
+The strange thing happens at the boundary stone, halfway up: the pack stops. All of it, all at once, at an invisible line in the grass — like dogs at the edge of a yard they were beaten in. They pace the line, flickering, and their print seethes, but not one serif crosses it. Whatever holds the pen holds the leash, and they remember it in their type.
+
+You climb the rest of the way alone, past the line even your own ending will not cross, and the house arrives around the lamp: low, turf-roofed, its one window burning steady amber. Woodsmoke. And under the woodsmoke, a smell that stands your fur on end because it is the smell the moral brought to your den door this morning — ink — but *tamer* here, domestic, the wolf's smell on the dog.
+
+Stacked against the wall, higher than the eaves, cut and split like cordwood: pens. Worn-out pens, thousands of them, each one written down to a stub.
+
+The door is ajar. It has been ajar, you understand suddenly, for a very long time. This is a door that has given up expecting anyone to have the nerve.
+
+* [Knock anyway, and go in.] -> fabulist
+
+:: fabulist
+Inside is one room, and the room is a desk, and at the desk, in a circle of lamplight, sits the Fabulist.
+
+You had imagined — what? A giant. A judge. Something with a beard made of beginnings. What sits in the lamplight is a small stooped figure in a shawl of felted grey, neither man nor woman nor animal quite — from one angle a spinster aunt, from another an old heron, from a third just a shadow that has learned to hold a pen. Ink to both elbows. Steel spectacles mended with wire. Before them on the desk lies the Great Ledger of the country, open, and you can see the day's page from the door: *OAK — FOX — CROW — CHEESE,* and next to it, in the space where the moral's feeding is recorded, a long, blotted, unhappy dash.
+
+"You're the fox," the Fabulist says, without looking up. The voice is dry and small, a nib on cheap paper. "The one who's been conducting a *census* out there all day." A page turns. "Sit. You've had a long story. I know. I've been taking it down."
+
+You sit. The fire ticks. The Fabulist reads the day back off the page, in the flat voice of a clerk confirming an order:
+
+~if truant: "*Failed to report to the oak.* First line of the day and already off the ruled path. Do you know how long it has been since a fable simply — didn't? The whole morning sat there in the Ledger with its hand out."
+
+~if broke-crow: "*Oak: fable interrupted; moral unfed; crow — *" and here the Fabulist stops, and holds the page slantwise to the lamp, as if the entry might be a flaw in the paper. "In two hundred years I have written THE CROW ten thousand times and the sentence has never once needed to go on. Today it wanted three more lines. I had to *think* about a crow. I was rather glad of it."
+
+~if tasted-grapes: "*Vineyard: grapes — checked. Sweet.*" The old head shakes slowly, side to side. "Two hundred years of SOUR — BY ORDER, fox, and you are the first creature in the history of this country to submit a correction."
+
+~if fraud: "*Racing meadow: result achieved by applied fox.*" The spectacles come down an inch. "That one curdled as I wrote it. You will have noticed. Meaning is like milk, fox; carried too fast, it turns."
+
+~if tame-moral: The Fabulist's eye finds the small warm comma in your ruff, and for a moment the clerk goes out of the old face entirely. "And *that*," the Fabulist says quietly, "is an entry I have no column for. It is new. Nothing in this country has been new since the ink was."
+
+Outside, far down the hill, the pack paces its line in the dark.
+
+"I suppose," the Fabulist says, and takes off the spectacles, and rubs the dents they've left, "you've come to ask me *why*. They always would, if they ever came. The door's been open two hundred years, fox. You're the first to walk up the hill instead of running down one."
+
+* [Ask for a new fable — yours.] -> ask-new
+* [Ask what a Fabulist is *for*.] -> ask-why
+
+:: ask-new
+"Write me a new one," you say. "You have the pen. Cross out the flattering fox and write — anything. Write the fox who checked. I'll take any fable that hasn't already eaten."
+
+The Fabulist looks at you for a long moment, and the look has a century of tiredness in it, and something else, way at the back, that might be the first pilot light of delight.
+
+"That's not how it works," the Fabulist says. "Fables aren't *issued*, whatever the country thinks. I don't invent them. I take dictation." A stained finger taps the Ledger. "The country does things, and the doings wear grooves, and the grooves become stories, and I write down the morals when they land. I never once wrote *the fox flatters*. Some fox flattered, fox — long before you — and ten thousand mornings wore it into a groove, and my whole work is keeping the ruts legible." The spectacles go back on. "So no. I can't write you a new fable. But you should know that the Ledger has been *illegible* since this morning. Every line I set down today came out different from the doing of it. Someone has been out there all day, doing things there is no groove for."
+
+The Fabulist stands, joints going off like green wood, and crosses to the desk drawer.
+
+* [Watch the drawer.] -> desk
+
+:: ask-why
+"What are you *for*?" you ask. "All of it. The grooves, the mornings, the feeding schedule. The crow loses her breakfast ten thousand times so that — what? Who is it all *for*?"
+
+The Fabulist is quiet so long you think the question has missed. Then:
+
+"Readers," the Fabulist says, simply. "You've never met one. They arrive hungry, fox — hungrier than any moral, hungrier than winter — and what they're hungry for is *shape*. Lives that mean. Days that add up. They press their faces against this country from a direction you can't point at, and they take away whatever we've made mean something, and it holds them together, a little, out there where nothing is issued at all and the mornings just happen, unsupervised." The old head shakes slowly. "The morals are how the country digests itself for them. It was never meant to hurt the crow. It was meant to *matter*, and mattering came out of us crooked, the way everything does when you do it ten thousand times."
+
+The fire ticks. "I am tired, fox. I have been keeping other creatures' meanings so long I cannot remember mine. And this morning something new came through the grooves like spring water, and it has been the first legible day in a hundred years, and it was *you*."
+
+The Fabulist stands, joints going off like green wood, and crosses to the desk drawer.
+
+* [Watch the drawer.] -> desk
+
+:: desk
+From the drawer the Fabulist takes a pen.
+
+Not one of the split stubs from the woodpile: a whole one, unworn, its nib bright as first frost. It goes down on the desk between you, on the open Ledger, next to the day's blotted dash, and the lamplight pools in the metal, and the room gets very quiet — the specific quiet of a page before a word.
+
+"Here is what I can do," the Fabulist says. "One line. The day's moral is unfed and the Ledger wants its entry, and somebody writes it tonight: that is the one law even I keep. I can hold the pen for you — I have held it for everyone, always, that is what a Fabulist is *for*, it turns out — or."
+
+The pause is a door coming open.
+
+"Or you hold it. Fox. I have been taking dictation from ruts for two hundred years, and this morning the ruts broke, and it was you that broke them. The Ledger doesn't want my line tonight. It wants yours. Only mind —" and the old eyes come up over the mended spectacles, suddenly not tired at all — "whatever you write, you must then *live under*. That is what a moral is. It is not a lesson, fox; it never was. It is a roof."
+
+~if kind: The pen lies on the Ledger, pointing at you like a compass needle that has finally found its business.
+
+* [Take the pen.] -> end-pen ~if kind
+* [Take the pen.] -> end-pen ~if named-crow
+* [Take the pen.] -> end-pen ~if tame-moral
+* [Let the Fabulist write it — as it always was written.] -> end-foxes-end

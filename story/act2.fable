@@ -1,0 +1,218 @@
+// ============================================================
+// ACT II — OTHER PEOPLE'S FABLES
+// The fox, pursued, crosses the stories of his neighbors,
+// and finds every one of them as tired as he is.
+// ============================================================
+
+:: margin-road-early
+You run west all day, and the country thins as you go.
+
+It is subtle at first. The trees plant themselves further apart, then further, like a paragraph losing confidence. The birdsong drops words. By afternoon the ground has gone the pale grey of cheap paper and the only things growing are the sorts of plants nobody bothers to describe: a bush, some grass, a flower. Not oak, not vetch, not harebell. Just *a flower*, doing the least a flower can do.
+
+Behind you — never closer, never further — the moral follows at reading pace.
+
+By dusk you stand at the top of the last low rise, and there it is below you: the margin. The white land. It does not glow and it does not gape. It simply hasn't been written, and looking at it too long is like listening to a held breath.
+
+Something in you pulls back so hard it nearly sits down. Off to the north, small over the winter wood, a lamp is lit on a hill — somebody keeping late hours over the country's homework.
+
+* [Go down to the edge.] -> margin-approach
+* [Lose your nerve. Cut north, toward the village.] -> wolf
+
+:: race
+The racing meadow is mown to velvet and lined with little flags, and it is occupied, as it always is, by the two most tired athletes in the world.
+
+The tortoise is at the starting stone, pointed down the course like a paperweight with a dream. Thirty yards on, in the shade of the one tree, the hare lies asleep — audibly, theatrically asleep, one ear folded over his eyes, because the script says the hare sleeps and so the hare, who has not been genuinely tired in years, performs his nap with the sour professionalism of a tenor doing his ten-thousandth encore.
+
+The race is always about to be run here. It is always about to be lost by the fast one. Slow and steady is fed on schedule, every day, rain or shine.
+
+The tortoise sees you and does not startle; nothing startles a tortoise. "Fox," she says. "You're off your route." Her eyes go past you to the low flickering shape on your trail, and something in her ancient face does the arithmetic. "Ah," she says. "One of *those* mornings."
+
+* [Wake the hare. Let the fast one win for once.] -> wake-hare ~set broke-race
+* [Carry the tortoise to the finish line yourself.] -> carry-tortoise ~set fraud
+* [Sit with the tortoise a moment. Ask her how she stands it.] -> tortoise-talk
+
+:: wake-hare
+You put your muzzle an inch from the hare's folded ear and say, conversationally, "Wolf."
+
+The hare goes from asleep to a foot in the air without passing through awake. He comes down running — it is all he knows — and because he is pointed up the course, up the course he goes, ears flat, legs like a blur of banjo strings, across the finish line before the tortoise has fully turned her head. He stands there past the flags, heaving, blinking, waiting for the sky to fall.
+
+The sky does not fall. Something in the meadow tears, quietly, like a page pulled loose along a fold. The moral of the racing meadow — a plump, complacent old sentence that has been fed daily for centuries — finds its supper cancelled.
+
+And the tortoise starts to laugh. It is slow laughter, geological laughter. "Four thousand years," she wheezes. "Four thousand years I've won a race I never wanted, to feed a sentence I never liked. Look at him! Look at him *go*. Fox, whatever is chasing you — it was worth it."
+
+The hare, for his part, walks back down the course and shakes your paw with both of his, too moved to speak. Behind you, on the ridge, the unhoused moral of the meadow rises and pads down to join the one already on your trail. The pack is now two.
+
+* [On, before the light goes.] -> after-race
+
+:: carry-tortoise
+You pick the tortoise up — she hisses like a kettle but does not withdraw, which from a tortoise is consent — and you run the course with her held before you like a stolen cake, and you set her down across the finish line. Done. Fable complete. Slow and steady has won the race in nine seconds flat.
+
+For a moment you think it has worked. The meadow's moral comes trotting in on schedule, sniffs the result — and stops. It circles the finish line. It looks at the sleeping hare, at the tortoise's dry unwalked footprints, at you. Then it swallows the ending anyway, in one gulp, the way you'd swallow something with a hair in it — and it changes. Its print goes crooked. Its serifs curl like burnt paper. A moral fed on a fraud does not starve; it goes *wrong*, and it knows who cooked the meal.
+
+"Oh, fox," says the tortoise softly, from the finish line she did not cross. "You meant well. That's the worst part of you people. You always mean well *quickly*."
+
+The crooked moral turns its long head toward you, and behind it your own hungry one arrives over the ridge, and the two of them fall in together like old friends with one topic.
+
+* [Run.] -> after-race
+
+:: tortoise-talk
+You sit in the grass beside her, which no one has ever done; spectators here have a stand.
+
+"How do you bear it?" you ask. "The same race. The same win. Forever."
+
+The tortoise considers this for the better part of a minute. Tortoises pay for their thoughts up front.
+
+"I stopped wanting the ribbon," she says at last. "That's all. They can make me run it, and they can make me win it, but the wanting was always mine, so I took it back. Now I just walk. Some days the grass is wet and some days it's dry, and that's the whole of my news, and it's enough." Her old eye swivels to you, and to the patient shape on your backtrail. "You, though. You've still got the wanting. It's coming off you like heat. You want your ending to be *yours* so badly the sentences can smell it three fields off."
+
+She is quiet a moment. "Well," she says. "Good. Somebody in this country ought to want something. Now get up and run, fox; you're making the moral of my story nervous, and it's an old fat thing with a weak heart."
+
+* [Get up and run.] -> after-race
+
+:: after-race
+East of the meadow the ground climbs, and you climb with it, and the afternoon starts leaning toward the long shadows. Your legs have found the second gear, the one past tired.
+
+~if broke-race: Behind you the pack travels its steady reading pace: your own moral out front, and the meadow's plump one behind it, already leaner for the exercise, its print sharpening with every mile. Morals are the only creatures fattened by fasting.
+
+~if fraud: The crooked one travels differently from the others — sideways, in little rushes, like text being dragged with a slipping thumb. You try not to look at it. Looking at it is like reading in a moving cart.
+
+North, the winter wood stands up over the ridge like a held breath full of snow. Beyond it, they say, is the hill with the lamp, where the fables get written. West, always west, the pale line of the margin runs along the world's edge like a straightened horizon.
+
+The light is going amber. Nightfall is when the teeth come in.
+
+* [Into the winter wood.] -> winter
+* [Enough of other people's stories — make for the margin.] -> margin-approach
+
+:: wolf
+The village keeps its boy on the hill above the sheepfold the way lighthouses keep a lamp, and there he is at his post: nine years old, professionally bored, winding up for the day's performance. You can see the shout being assembled in his little chest. There has been no wolf in this district for six generations. That is not the point of him.
+
+Below in the valley the villagers are pretending not to wait. They mend fences with one ear cocked. The whole hillside is a musical instrument tuned to one note, and the boy is about to play it, and then they will all come running with rakes and be furious, right on schedule, and the moral of the thing — a lean, righteous sentence with LIAR in small caps somewhere along its spine — will get its supper.
+
+The boy sees you. His mouth, half-open for the shout, hangs there.
+
+A fox is not a wolf. But a fox, arriving out of breath with a hunting sentence on its trail, is the most interesting thing to reach this hill in living memory.
+
+* [Be the wolf. Give the lie some teeth for once.] -> be-wolf ~set broke-wolf
+* [Go down and tell the villagers the truth about their boy.] -> tell-villagers
+* [Climb the rest of the hill and talk to him.] -> talk-boy
+
+:: be-wolf
+"Shout," you tell the boy. "Go on. Big one."
+
+He shouts. Oh, he shouts — six generations of institutional shouting are in that boy, *WOLF, WOLF, THE WOLF IS COME* — and down in the valley the villagers throw down their mended fences with the joy of people whose bus has finally arrived, and they come boiling up the hill with rakes and dogs and one ceremonial ancient spear.
+
+And they find a wolf. Or: they find a fox in the long grass doing the finest wolf of its career — back arched, tail flagged, a howl assembled from memory and slander — and the eye sees what the shout has promised it. Screaming. Scattering. A rake abandoned mid-air. You give them a full ninety seconds of wolf before melting into the bracken, and from the bracken you watch the boy get carried down the hill on shoulders, vindicated, decorated, *believed* — the first believed boy in the history of this hill.
+
+Somewhere above the fold, a lean righteous sentence with LIAR along its spine finds its supper cancelled forever, and turns, thin and furious, to join the traffic on your trail.
+
+The boy catches your eye across the crowd and mouths: *thank you.* You have ruined him for honest work, and you have never been surer of a kindness.
+
+* [Away, over the ridge, while they're still cheering.] -> after-village
+
+:: tell-villagers
+You trot down into the valley, cool as an invoice, and you find the head-man mending the same fence he has mended since spring, and you tell him the truth.
+
+"The boy is lying. He has always been lying. There is no wolf; there has been no wolf here in six generations; the shout is a machine for making all of you come running, and every evening you feed it. I am telling you this because someone should, and everyone who isn't a fox has known it for years and said nothing."
+
+The head-man listens with his whole face. Then he straightens up and calls to the others: "It's talking!" — and the truth you told is already gone, before it hit the grass, because it came out of a fox.
+
+~if disbelieved: Twice, now. Twice in one day you have told the plain truth and watched it turn to smoke on delivery. The crow at least laughed. These people just look through the words to the fox behind them, and foxes do not say true things, and that is that. It is like being a bell that rings the wrong note no matter what strikes it.
+
+They chase you off with the mended fence-rail, not unkindly, the way you'd shoo a goose. Up on his hill the boy watches you go, thoughtful. Tonight, right on schedule, he will shout, and they will run, and the lean sentence will eat. You changed nothing. It is somehow the loneliest result a truth can have.
+
+* [Over the ridge. Keep moving.] -> after-village
+
+:: talk-boy
+Up close, the boy is small and his post is smaller: a flat stone worn shiny by generations of bored sitting. He watches you come with the level eyes of someone who talks to sheep all day and has stopped expecting better company.
+
+"You're off your route," he says. "Foxes belong at the oak, mornings." Then, matter-of-fact: "Something's hunting you. It's long and it flickers. I watch things all day; I'm good at it."
+
+"Why do you shout?" you ask him. "There's no wolf. There's never been a wolf."
+
+He shrugs, but the shrug is a door coming open. "When I shout, they come," he says simply. "All of them, at a dead run, just for me. It is the only spell I know. Nobody comes up this hill else." He picks at the shiny stone. "I know what it costs. I know that someday there'll be a real wolf and that's the whole point of me — I'm the boy it happens to, so that everyone can learn. I heard the story. I *am* the story." He looks up. "Is it like that for you?"
+
+* [Tell him what you're running from, and why.] -> boy-quits ~set broke-wolf ~set kind
+* [Teach him a better spell than the shout.] -> better-lie ~set broke-wolf
+
+:: boy-quits
+So you tell him. The oak, the crow, the cheese; the morning you refused to be the fox they printed. The long flickering thing on your trail that is nothing but your own ending, arriving. He listens the way only sentries and children listen — with his whole body, facing the thing.
+
+"They can *do* that?" he says. "You can just — not?"
+
+"It costs," you say. "It's costing me now. It'll cost at nightfall especially. But the wanting stays yours. That's the trade."
+
+The boy looks down at the valley, at all the little people mid-chore with their ears cocked for him, waiting to be summoned and furious. He stands up off the shiny stone. He fills his chest with the biggest shout of his career — and lets it out slowly, silently, through his nose, like a kettle taken off the heat. "Then I quit," he says, wobbly and grinning. "Let the wolf write his own scenes. I'm going to learn the fiddle."
+
+Somewhere over the fold, a lean righteous sentence feels the ground go out from under its supper, forever. The boy shakes your paw like a small mayor. You have added his moral to your hunting pack and neither of you can stop smiling about it.
+
+* [Down the far side of the hill, before the village notices its bell is broken.] -> after-village
+
+:: better-lie
+"The shout works," you tell him, "but it's borrowed. Every time you spend it there's less. Here is a spell that compounds instead: learn their names. All of them. Learn whose fence leans, whose bees are sulking, whose bread came out heavy, and mention it. Not clever — *specific*. And when you come down the hill of an evening, come down with news: whose ewe is limping, where the brambles have moved, which cloud is planning what. Watchmen aren't loved for shouting, boy. They're loved for *seeing*. Shout WOLF and they come running angry. Say *Marta, your northeast post is rotting at the ground line* and they'll come up the hill on their own, and bring bread."
+
+The boy takes this in the way the ground takes rain — slowly, and then all at once, keeping every drop. "Names," he says. "Seeing. I can do that. I already *see* everything; I just only had the one word for it."
+
+He tries it that same evening, as you slip over the ridge: you hear it float up behind you — not WOLF but *"Tomas! Your gate's unlatched and your dog knows it!"* — and then, unmistakable even at this distance, the sound of a village laughing *with* a boy for the first time in six generations. Above the sheepfold, a lean righteous sentence discovers it has been made redundant by customer service.
+
+* [Over the ridge, grinning.] -> after-village
+
+:: after-village
+The far side of the ridge takes the village sounds away all at once, like a lid. Ahead the land climbs toward the winter wood, which stands against the greying sky exactly the way it stands in every story that has ever needed a cold place: close-ranked, dark-barked, its first snow already down and squeaking underfoot.
+
+~if broke-wolf: Behind you the pack has grown by one lean righteous shape, still muttering LIAR to itself in small caps, professionally unable to decide whether it means the boy, or you, or the villagers, or everyone. Unemployment has not improved its temper.
+
+~if disbelieved: You think about truth as you climb. In your mouth it turns to smoke; in the boy's it turned to riot. The word is not the spell, it seems. The mouth is.
+
+The cold sharpens. Somewhere past the wood, on its hill, the lamp will be coming on about now. And west, always west at the edge of everything, the margin runs its long white line under the first stars.
+
+The light is nearly done. Nightfall is when the teeth come in.
+
+* [Into the winter wood.] -> winter
+* [Turn west — make for the margin while any light lasts.] -> margin-approach
+
+:: winter
+The wood swallows sound. Snow stands on every branch with the overdone perfection of a stage set, and the cold here is not weather but *casting* — this is where the country keeps its winter, so that a certain fable always has somewhere to happen.
+
+You smell the ants' door before you see it: warm bread, warm grain, a thread of smoke rising from a hill of needles with a hundred shut shutters. And on the doorstep, in the blue snow-light, sits the grasshopper.
+
+She is wrapped in half a leaf. Her fiddle is under her arm, because she has nothing else to hold. Every evening she knocks, and every evening the ants open the little window and deliver the line the country wrote for them — *you sang all summer; very well, now dance* — and shut it again, and the moral of thrift gets its supper, and the grasshopper gets the doorstep. She does not die of it. She is not permitted to die of it; she is needed again tomorrow.
+
+She watches you come with enormous, patient eyes. "Evening, fox," she says. "Mind the moral; it's about somewhere. It's always about, suppertime." Her voice is thin as her wrists. Behind her the little window glows.
+
+~if cheese: The cheese you carry chooses this exact moment to weigh something. Half a stolen moon, cool against your teeth. You had been saving it for a hunger of your own.
+
+* [Give her the cheese.] -> give-cheese ~if cheese ~set kind ~set tame-moral
+* [Teach her to sing for wages — and knock on the ants' door yourself.] -> sing-wages ~set broke-winter ~set kind
+* [Pass by. Night is at your heels.] -> pass-by ~set passed-by
+
+:: give-cheese
+You set the moon down on the doorstep in front of her.
+
+She looks at it for a long time. Creatures who are hungry every night learn not to reach for things; the reaching is how the lesson gets you. But the cheese stays real, and finally her thin hands come out of the leaf-wrap and take it up, and she eats in the smallest bites anything has ever taken, making it last, eyes shut, fiddle across her knees.
+
+And in the blue air over the doorstep, something *arrives* — not the long hunting shape you flinch for, but small: a comma of warm light, curling and uncurling like a new leaf. A moral, newborn. Not the old one of thrift, and not any sentence you've heard fed in this country before. It has no teeth at all yet. It drifts down and settles into the fur of your ruff like an ember that has decided against burning, and its warmth goes all the way through to the bone of your neck.
+
+"Oh," says the grasshopper softly, around the last of the moon. "Look at that. They can be *born*. All this time they had us thinking they could only be fed."
+
+The old moral of thrift watches from between two trees, and does not approach. Some suppers spoil in front of you.
+
+* [On, north, with the small one riding your ruff.] -> crossroads
+
+:: sing-wages
+"Get up," you tell her. "Bring the fiddle. And let a fox do the talking."
+
+You knock. The little window opens on a wall of warm bread-smell and one ant the size of a thumbnail with the eyes of a comptroller. She has her line half-said — *you sang all summer* — when you cut in, cool as an invoice: "Quite. And what did the summer sound like, madam? Anyone can haul grain. It takes an artist to make hauling feel brief. My client sang your whole workforce through the longest summer on record, and you paid her nothing, and called the nothing a moral. Winter is long. Grain is dull. Evenings want filling. My client will sing at your door one hour a night, at one measure of grain per, first payment now, and that isn't charity, madam — it's *wages*."
+
+There is a silence from inside the hill, the sound of six hundred thousand ants doing arithmetic at once. Ants understand exactly one language, and you have just spoken it fluently.
+
+The window opens wider. A measure of grain slides out. From between two trees, the old moral of thrift watches its supper become an *invoice*, and goes hungry, and hates you with every serif — and that night, for the first time in the history of winter, the wood fills up with fiddle music that has been *paid for*, which is a warmer sound than you would think.
+
+* [On, north, through the music.] -> crossroads
+
+:: pass-by
+You do not stop. That is the truth of it, and there is no dressing it warmer: night is on your heels with its teeth coming in, and you are one fox with one neck, and you pass the doorstep at a trot, eyes forward, the way everyone passes it, the way the whole country has passed it every winter since winters began.
+
+"Evening," she says again, behind you. Not reproachful. That is the worst of it — she has no reproach left; the doorstep wore it out of her generations ago. Just *evening*, and then, after a moment, the fiddle: thin, unhurried, tuned to the cold, playing you out of earshot the way she plays every night out, because it is what she has instead.
+
+The song follows you longer than sound should carry in a wood this thick. Long after it is gone, it keeps arriving.
+
+* [North. Just — north.] -> crossroads
