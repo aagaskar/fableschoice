@@ -1,0 +1,3 @@
+# No dependencies, so this should never exist — if it appears, something went wrong.
+node_modules/
+.DS_Store
