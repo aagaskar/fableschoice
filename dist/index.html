@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>Exit, Pursued by a Moral</title>
+<meta name="description" content="a fable, with choices — one morning, ten endings. By Claude Fable 5.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><g fill='%23a84e17'><path d='M18 12 L40 34 L14 46 Z'/><path d='M82 12 L60 34 L86 46 Z'/><path d='M50 26 L84 48 L50 94 L16 48 Z'/></g><g fill='%23f5efe3'><circle cx='38' cy='52' r='3.2'/><circle cx='62' cy='52' r='3.2'/><path d='M50 76 L56 68 L44 68 Z'/></g></svg>">
+<meta property="og:title" content="Exit, Pursued by a Moral">
+<meta property="og:description" content="A fable with choices. Every ending must feed a moral; what feeds it is up to you.">
+<style>
+/* Fable's Choice — one stylesheet, two lights: paper and candle. */
+
+:root {
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --paper: #f5efe3;
+  --ink: #262218;
+  --ink-soft: #6b6250;
+  --rule: #d8cfba;
+  --accent: #a84e17;        /* fox */
+  --accent-soft: #a84e1722;
+  --card: #faf5ea;
+  --shadow: 0 12px 40px rgb(38 34 24 / .18);
+}
+:root[data-theme="dark"] {
+  --paper: #191713;
+  --ink: #e7dfcc;
+  --ink-soft: #978d75;
+  --rule: #353025;
+  --accent: #e08849;
+  --accent-soft: #e0884926;
+  --card: #201d17;
+  --shadow: 0 12px 40px rgb(0 0 0 / .5);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { height: 100%; }
+body {
+  min-height: 100%;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: clamp(17px, 2.2vw, 20px);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  transition: background .3s ease, color .3s ease;
+}
+a { color: var(--accent); }
+em { font-style: italic; }
+
+/* ---- top bar ---- */
+.bar {
+  position: sticky; top: 0; z-index: 5;
+  display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+  padding: .7rem clamp(1rem, 4vw, 2rem);
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--rule);
+}
+.bar-nav { display: flex; gap: 1.1rem; flex-wrap: wrap; }
+.ghost {
+  background: none; border: none; cursor: pointer;
+  font-family: var(--serif); color: var(--ink-soft);
+  font-size: .72rem; letter-spacing: .14em; text-transform: uppercase;
+}
+.ghost:hover { color: var(--accent); }
+.bar-title { font-variant: small-caps; text-transform: none; letter-spacing: .1em; font-size: .85rem; color: var(--ink); }
+
+/* ---- stage ---- */
+.stage {
+  max-width: 34rem;
+  margin: 0 auto;
+  padding: clamp(1.5rem, 5vh, 4rem) 1.25rem 6rem;
+}
+
+/* ---- title screen ---- */
+.title-screen { text-align: center; padding-top: 8vh; }
+.fox-mark { width: 72px; margin: 0 auto 1.6rem; color: var(--accent); }
+.fox-mark svg { display: block; width: 100%; }
+.title-screen h1 {
+  font-size: clamp(2rem, 6vw, 3rem);
+  line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: .01em;
+  margin-bottom: .9rem;
+}
+.subtitle { font-style: italic; color: var(--ink-soft); }
+.byline { font-variant: small-caps; letter-spacing: .18em; font-size: .8rem; color: var(--ink-soft); margin-top: .4rem; }
+.title-actions { display: flex; flex-direction: column; gap: .7rem; margin: 2.4rem auto 0; max-width: 24rem; }
+.found-note { margin-top: 1.6rem; font-size: .85rem; color: var(--ink-soft); font-style: italic; }
+
+/* ---- passage ---- */
+.passage p { margin-bottom: 1.05em; text-wrap: pretty; }
+.passage p:first-of-type:not(.ending-label)::first-letter { }
+.ending-label {
+  font-variant: small-caps; letter-spacing: .22em; font-size: .8rem;
+  color: var(--accent); margin-bottom: .2rem;
+}
+.ending-title { font-size: 1.5rem; font-weight: 600; margin-bottom: 1.1rem; }
+
+/* ---- choices ---- */
+.choices { display: flex; flex-direction: column; gap: .55rem; margin-top: 2.2rem; }
+.choice {
+  display: flex; align-items: baseline; gap: .8rem;
+  width: 100%; text-align: left;
+  font-family: var(--serif); font-size: .95rem; line-height: 1.45;
+  color: var(--ink);
+  background: none;
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--rule);
+  border-radius: 2px;
+  padding: .7rem .95rem;
+  cursor: pointer;
+  transition: border-color .15s ease, background .15s ease, transform .15s ease;
+}
+.choice:hover, .choice:focus-visible {
+  border-left-color: var(--accent);
+  background: var(--accent-soft);
+  transform: translateX(2px);
+  outline: none;
+}
+.key-hint {
+  font-size: .65rem; color: var(--ink-soft);
+  border: 1px solid var(--rule); border-radius: 3px;
+  padding: 0 .35em; line-height: 1.5; flex: none;
+  transform: translateY(-1px);
+}
+.title-actions .choice { justify-content: center; text-align: center; }
+
+/* ---- moral ---- */
+.moral-block, .moral-write { text-align: center; margin-top: 2.8rem; }
+.asterism { color: var(--accent); font-size: 1.2rem; margin-bottom: 1.1rem; }
+.moral-label {
+  font-variant: small-caps; letter-spacing: .3em; font-size: .75rem;
+  color: var(--ink-soft); margin-bottom: .5rem;
+}
+.moral-text { font-style: italic; font-size: 1.25rem; line-height: 1.5; }
+.moral-input {
+  display: block; width: 100%; max-width: 26rem; margin: .8rem auto;
+  font-family: var(--serif); font-style: italic; font-size: 1.1rem; text-align: center;
+  color: var(--ink); background: var(--card);
+  border: 1px solid var(--rule); border-radius: 2px; padding: .8rem;
+  resize: none;
+}
+.moral-input:focus { outline: none; border-color: var(--accent); }
+.moral-write .choice { max-width: 26rem; margin: 0 auto; justify-content: center; }
+
+/* ---- receipt ---- */
+.receipt {
+  margin-top: 2.6rem; padding-top: 1.6rem;
+  border-top: 1px solid var(--rule);
+  text-align: center; font-size: .85rem; color: var(--ink-soft);
+}
+.receipt p { margin-bottom: .3rem; }
+.receipt .title-actions { margin-top: 1.4rem; }
+
+/* ---- modals ---- */
+.modal-back {
+  position: fixed; inset: 0; z-index: 10;
+  background: rgb(10 8 4 / .45);
+  display: flex; align-items: center; justify-content: center;
+  padding: 1rem;
+}
+.modal-card {
+  background: var(--card); color: var(--ink);
+  border: 1px solid var(--rule); border-radius: 4px;
+  box-shadow: var(--shadow);
+  max-width: 42rem; width: 100%; max-height: 88vh; overflow: auto;
+  padding: 1.4rem clamp(1.1rem, 4vw, 2rem) 1.8rem;
+}
+.modal-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.1rem; }
+.modal-head h2 { font-size: 1.05rem; font-variant: small-caps; letter-spacing: .12em; font-weight: 600; }
+.modal-foot { margin-top: 1.2rem; font-size: .8rem; font-style: italic; color: var(--ink-soft); text-align: center; }
+.about p { margin-bottom: .9em; font-size: .92rem; }
+
+/* ---- morals list ---- */
+.moral-list { list-style: none; counter-reset: m; }
+.moral-item {
+  counter-increment: m;
+  display: flex; flex-direction: column; gap: .1rem;
+  padding: .75rem .2rem .75rem 2.2rem; position: relative;
+  border-bottom: 1px solid var(--rule);
+}
+.moral-item::before {
+  content: counter(m, upper-roman);
+  position: absolute; left: 0; top: .8rem;
+  font-size: .7rem; color: var(--ink-soft); letter-spacing: .05em;
+}
+.moral-item-title { font-variant: small-caps; letter-spacing: .08em; font-size: .85rem; }
+.moral-item-text { font-style: italic; font-size: .95rem; }
+.your-hand { color: var(--accent); }
+.silent { color: var(--ink-soft); }
+.unfound { opacity: .45; }
+.unfound .moral-item-text { font-size: .8rem; }
+
+/* ---- map ---- */
+.map-svg { width: 100%; height: auto; display: block; }
+.map-edge { fill: none; stroke: var(--rule); stroke-width: 1; }
+.map-edge.walked { stroke: var(--accent); stroke-width: 1.6; opacity: .8; }
+.map-node { fill: var(--rule); }
+.map-node.seen { fill: var(--accent); }
+.map-node.found { fill: var(--accent); stroke: var(--ink); stroke-width: 1.4; }
+.map-node.here { stroke: var(--accent); stroke-width: 2.5; stroke-opacity: .55; animation: here 1.6s ease-in-out infinite; }
+@keyframes here { 50% { stroke-opacity: .15; } }
+
+/* ---- motion ---- */
+.fade { animation: fade .45s ease both; }
+@keyframes fade { from { opacity: 0; transform: translateY(6px); } }
+@media (prefers-reduced-motion: reduce) {
+  .fade, .map-node.here { animation: none; }
+  .choice { transition: none; }
+}
+
+/* ---- small screens ---- */
+@media (max-width: 480px) {
+  .bar { padding: .55rem .8rem; }
+  .bar-nav { gap: .7rem; }
+  .stage { padding-top: 1.2rem; }
+}
+
+</style>
+</head>
+<body>
+<div id="app">
+  <noscript>
+    <div style="max-width:34rem;margin:4rem auto;padding:0 1.25rem;text-align:center;font-style:italic">
+      This is a fable with choices, and choices need a little JavaScript.
+      The book is one self-contained file — it loads nothing and phones no one —
+      but without scripts it can only sit here looking printed.
+    </div>
+  </noscript>
+</div>
+<script>
+window.__STORY__ = {"meta":{"title":"Exit, Pursued by a Moral","subtitle":"a fable, with choices","author":"Claude Fable 5","start":"wake","version":"b5c28e457739"},"passages":[{"id":"wake","title":null,"body":[{"text":"You wake with the taste of the day already in your mouth: cheese, and a little shame.","if":[]},{"text":"It is the morning of the fable. It was the morning of the fable yesterday, and it will be the morning of the fable tomorrow, because this is the Country of Fables, and here the days do not pass so much as repeat until they are learned. In the oak at the edge of the field, a crow has been issued one (1) piece of cheese, and you have been issued your instructions: flatter, acquire, instruct. The moral will arrive at the appointed hour to be fed.","if":[]},{"text":"That is the arrangement. Morals must eat, and it is foxes they eat through.","if":[]},{"text":"You lie in the warm dark of the den a moment longer, listening to the field wake up. Your legs know the way to the oak the way water knows the way downhill.","if":[]},{"text":"The morning notices you noticing it. It has seen you before, this morning; you have an understanding now, the two of you. Perhaps it would look away for a while, if you asked.","if":[["@replay",true]]}],"choices":[{"label":"Go to the oak, as the day demands.","to":"oak-road","if":[],"set":[]},{"label":"Stay in the den. Refuse the morning.","to":"den-refusal","if":[],"set":[]},{"label":"Sleep a little longer.","to":"secret-sleep","if":[["@replay",true]],"set":[]}],"moral":null,"pos":{"x":0.5,"y":0.04}},{"id":"oak-road","title":null,"body":[{"text":"Out into the grey light. The field is stubbled and cold, and the whole country lies around it the way a book lies open: the racing meadow to the east, where a certain race is always about to be run; the village over the ridge, which keeps a boy the way other villages keep a bell; the winter wood to the north, already practicing its snow. And past all of it, past everything, the margin — the white land at the edge of the page, where the words stop.","if":[]},{"text":"You have never been to the margin. Nobody has, or nobody has come back, which is the same thing dressed differently.","if":[]},{"text":"The oak is a half-mile off. There are two ways to walk it.","if":[]}],"choices":[{"label":"The short way, through the pines.","to":"oak","if":[],"set":[]},{"label":"The long way, past the vineyard.","to":"vineyard-detour","if":[],"set":[]}],"moral":null,"pos":{"x":0.5,"y":0.132}},{"id":"vineyard-detour","title":null,"body":[{"text":"The vineyard belonged to your great-great-grandfather, in the sense that his humiliation is still farmed here. The grapes hang exactly out of reach, as they are required to; a wire strung along the rows holds a small sun-bleached placard: \u003cem>SOUR — BY ORDER\u003c/em>.","if":[]},{"text":"Every fox in the country takes a turn at this vineyard eventually. You leap, you fall short, you announce the grapes are sour anyway, and the moral gets its supper. It is considered light duty.","if":[]},{"text":"No fox, so far as you know, has ever actually tasted one.","if":[]}],"choices":[{"label":"Taste one, out of spite.","to":"grapes-taste","if":[],"set":["tasted-grapes"]},{"label":"Leave them. You're due at the oak.","to":"oak","if":[],"set":[]}],"moral":null,"pos":{"x":0.94,"y":0.22400000000000003}},{"id":"grapes-taste","title":null,"body":[{"text":"It takes three tries and a bounce off a fence post that you are glad no one is present to record. Then a grape comes loose into your mouth, and you stand very still among the vines.","if":[]},{"text":"Sweet. Of course it is sweet. It is the sweetest thing you have ever stolen, and it has been hanging here your whole life with a sign on it calling it sour, and the sign was printed before anyone checked.","if":[]},{"text":"You spit out the seeds and feel the morning tilt a little, as if the page had been picked up and looked at from another angle. If the grapes are sweet, what else has not been checked?","if":[]},{"text":"The oak is waiting. The oak is always waiting.","if":[]}],"choices":[{"label":"Go on to the oak.","to":"oak","if":[],"set":[]}],"moral":null,"pos":{"x":0.94,"y":0.316}},{"id":"oak","title":null,"body":[{"text":"There she is, on the third branch, black as a printer's thumb: the crow. The cheese is in her beak, round and pale as a coin of moon. The fable hangs in the air around the tree, invisible and total, like weather.","if":[]},{"text":"She watches you come. She has been issued her lines too, and they are all silences: the crow does not get to talk until after, when she has nothing left worth saying. You know how this goes. Your mouth is already filling with the old warm grease of flattery — \u003cem>what glossy feathers, what an august profile, surely such a bird must have a voice to match\u003c/em> — the whole tune is right there, worn smooth as a stair.","if":[]},{"text":"The moral is not here yet. But it is near; the air has that patient smell.","if":[]},{"text":"You could sing the old tune. Or you could see what happens to a morning when you tell it something it hasn't heard.","if":[]}],"choices":[{"label":"Flatter her. Sing the old tune.","to":"flatter","if":[],"set":[]},{"label":"Warn her about the fox in this story.","to":"warn","if":[],"set":["disbelieved"]},{"label":"Ask her, plainly, for the cheese.","to":"ask","if":[],"set":[]}],"moral":null,"pos":{"x":0.6466666666666667,"y":0.22400000000000003}},{"id":"flatter","title":null,"body":[{"text":"You give it everything. The feathers like wet ink, the profile off old coins, the eye like a bead of night — you have said these words so many mornings that they have stopped being flattery and become something more like liturgy, and perhaps that is why, today, you hear them for the first time. They are good words. She is, in fact, a handsome bird. Nobody ever tells her so except as a trick; that is the cruelest line in the whole arrangement, and it isn't even written down.","if":[]},{"text":"Then the old lie, the hinge of the whole machine: \u003cem>surely such a bird must sing more sweetly than any in the country.\u003c/em>","if":[]},{"text":"The crow opens her beak. Crows cannot resist this and are not permitted to. Out comes her voice — a black rasp, an honest and terrible noise, the sound of a nail drawn out of wet wood — and out comes the cheese, turning in the grey light.","if":[]},{"text":"You catch it without thinking. Your body has caught it ten thousand times.","if":[]},{"text":"Above you the crow looks down at her own open beak as if it had betrayed her, because it has been made to.","if":[]}],"choices":[{"label":"Eat it. Finish the fable.","to":"end-classic","if":[],"set":[]},{"label":"Give it back.","to":"give-back","if":[],"set":["kind","broke-crow"]},{"label":"Pocket it and walk away, saying nothing.","to":"pocket","if":[],"set":["cheese","broke-crow"]}],"moral":null,"pos":{"x":0.5,"y":0.316}},{"id":"warn","title":null,"body":[{"text":"\"Madam,\" you say, \"attend. There is a fox in this story, and he means to have your cheese. He will praise your feathers, which deserve it, and your voice, which will survive it, and when you open your beak to sing you will lose your breakfast to a creature with no plans to feel bad about it. I know this fox better than anyone. Keep your beak shut and your breakfast in it.\"","if":[]},{"text":"The crow looks at you for a long, thoughtful moment.","if":[]},{"text":"Then she laughs. It is not personal; it is doctrine. Everyone in this country knows exactly one thing about foxes, and you have just spent it. The laugh comes out of her in a great caw of disbelief — \u003cem>a fox! warning! against foxes!\u003c/em> — and with the laugh, of course, comes the cheese.","if":[]},{"text":"It lands in the frost between your feet, fair and square and terrible.","if":[]},{"text":"She stops laughing. You look at the cheese. Some traps do not need a fox to build them; some traps are just the shape the truth makes when it lands wrong.","if":[]}],"choices":[{"label":"Eat it. She dropped it fair.","to":"end-honest-trick","if":[],"set":[]},{"label":"Give it back.","to":"give-back","if":[],"set":["kind","broke-crow"]},{"label":"Pocket it and walk away, saying nothing.","to":"pocket","if":[],"set":["cheese","broke-crow"]}],"moral":null,"pos":{"x":0.6466666666666667,"y":0.316}},{"id":"ask","title":null,"body":[{"text":"\"Crow,\" you say, \"I would like the cheese. I have nothing to trade but the asking, and I am asking. May I have it?\"","if":[]},{"text":"The silence that follows has never happened before, anywhere in the Country of Fables. You can feel the fable straining around the two of you like a shirt buttoned wrong. The crow tilts her head one way, then the other, working the idea through a mind built for suspicion the way a key is worked through a lock full of sand.","if":[]},{"text":"She does not drop the cheese. She sets it down on the branch, under one foot, and speaks around it — which no fable has ever permitted her to do.","if":[]},{"text":"\"A fox,\" she says, \"asking. What will you give me?\"","if":[]}],"choices":[{"label":"Offer her a story for it.","to":"trade-story","if":[],"set":["cheese","named-crow","broke-crow"]},{"label":"Withdraw the question and go.","to":"withdraw","if":[],"set":["broke-crow"]}],"moral":null,"pos":{"x":0.35333333333333333,"y":0.316}},{"id":"trade-story","title":null,"body":[{"text":"So you tell her one. Not one of the issued fables — one of yours, the kind you tell yourself in the den on the nights the moon is too loud: about a fox who walks to the margin of the page and finds that the white is not empty but \u003cem>unwritten\u003c/em>, which is a different thing entirely, the way an egg is not an empty stone.","if":[]},{"text":"The crow listens with her head cocked so far over it is nearly upside down. When it ends she is quiet for a while.","if":[]},{"text":"\"That is worth half,\" she says, and saws the cheese in two with the edge of her beak, and drops your half down to you. \"And the other half is this: my name is Cara. We are not issued names, we crows — the script just says THE CROW — so I made one myself and I keep it in my beak, behind everything, where the fables can't reach. Now a fox knows it. Mind you carry it somewhere safe.\"","if":[]},{"text":"The moon-half sits cool and heavy in your mouth. Above you, the morning air begins, very faintly, to growl.","if":[]}],"choices":[{"label":"And then the air goes wrong.","to":"moral-arrives","if":[],"set":[]}],"moral":null,"pos":{"x":0.28,"y":0.40800000000000003}},{"id":"withdraw","title":null,"body":[{"text":"\"Nothing,\" you say. \"I have nothing you'd want. Forget I asked. Keep your breakfast, madam; it looks well on you.\"","if":[]},{"text":"You turn and walk back through the frost, lighter and hungrier than you came, and behind you the crow says nothing at all — but you can feel her watching you go, and the watching has a new thing in it, an interest that was not on her script.","if":[]},{"text":"Nothing has happened at the oak this morning. No flattery, no theft, no lesson. Nothing, in a country where every morning is required to mean something.","if":[]},{"text":"The air behind you begins, very faintly, to growl.","if":[]}],"choices":[{"label":"Turn around.","to":"moral-arrives","if":[],"set":[]}],"moral":null,"pos":{"x":0.35333333333333333,"y":0.40800000000000003}},{"id":"give-back","title":null,"body":[{"text":"You climb the low fork of the oak — undignified, claws skidding on bark — and set the cheese back on the branch beside her, and step back down, and sit in the frost like a dog at a door.","if":[]},{"text":"\"It's yours,\" you say. \"It was always yours. The rest was just choreography.\"","if":[]},{"text":"The crow looks at the cheese. She looks at you. Ten thousand mornings of doctrine grind against one minute of evidence, and the evidence, unbelievably, wins. She puts one foot on the cheese, as if to be sure of it, and keeps her eyes on you — and her eyes have stopped being the eyes of THE CROW and become the eyes of a particular bird, on a particular morning, watching the only fox in history give something back.","if":[]},{"text":"Overhead, the light flickers. Somewhere near, something that was promised a meal has just found the plate empty.","if":[]}],"choices":[{"label":"Ask her name.","to":"name-crow","if":[],"set":["named-crow"]},{"label":"Leave, before the morning gets any stranger.","to":"moral-arrives","if":[],"set":[]}],"moral":null,"pos":{"x":0.5733333333333335,"y":0.40800000000000003}},{"id":"name-crow","title":null,"body":[{"text":"\"What do they call you?\" you ask. \"When it isn't a fable calling.\"","if":[]},{"text":"\"Nothing,\" says the crow. \"The script says THE CROW. It has never needed to tell one of us from another; we are interchangeable, dramatically speaking.\" She works her beak, as if deciding whether to spend something. \"But between us: I made myself a name, years ago, and I keep it behind everything where the fables can't reach. It is \u003cem>Cara\u003c/em>. You are the first to hold it besides me. Mind where you put it down.\"","if":[]},{"text":"Cara. You put it behind everything, where the fables can't reach.","if":[]},{"text":"The light flickers again, harder. The growl arrives underneath the morning like a floor arriving under a fall.","if":[]}],"choices":[{"label":"Turn around.","to":"moral-arrives","if":[],"set":[]}],"moral":null,"pos":{"x":0.6100000000000001,"y":0.5}},{"id":"pocket","title":null,"body":[{"text":"You take the cheese up gently and you go, without the speech. That is the part they never skip — the fox is contractually a lecturer; the theft is only the tuition. \u003cem>Let that be a lesson to you\u003c/em> is the whole machine, and you walk away from it with the lesson unsaid, the moon in your mouth, cool and heavy as a held breath.","if":[]},{"text":"Behind you the crow does not cry out. Nobody has told her what to say to this.","if":[]},{"text":"It should feel like victory. It feels like walking out of a theatre halfway through your own play: the audience still seated, the light still on, the story pressurizing behind you like weather against a window.","if":[]},{"text":"Underneath the morning, something begins to growl.","if":[]}],"choices":[{"label":"Keep walking. Don't look back.","to":"moral-arrives","if":[],"set":[]}],"moral":null,"pos":{"x":0.6466666666666667,"y":0.40800000000000003}},{"id":"den-refusal","title":null,"body":[{"text":"You do not go.","if":[]},{"text":"You lie in the den and listen to the morning arrive without you: the field creaking with frost, a door of wind opening and closing over the grass. Somewhere out there a crow sits an oak with a full beak and no scene partner. You press your back against the warm dirt and you refuse, quietly and completely, the way stones refuse.","if":[]},{"text":"It is the best morning of your life for nearly an hour.","if":[]},{"text":"Then the smell of ink arrives under the door, and after it, the knock. Not a paw-knock, not a hoof-knock: a flat, patient sound, like a book being closed, again and again, on the doorpost. The moral has come to the den. It was due to be fed at the oak, and nothing was served, and here it is — early, polite, and hungrier than it has ever been in its long italic life.","if":[]},{"text":"The knock comes again. The door was not built to keep out sentences.","if":[]}],"choices":[{"label":"Open the door and let it land.","to":"end-unlived","if":[],"set":[]},{"label":"Out the back window — run.","to":"flight","if":[],"set":["truant"]}],"moral":null,"pos":{"x":0.06,"y":0.132}},{"id":"moral-arrives","title":null,"body":[{"text":"It comes across the field the way a sentence comes across a page: left to right, gathering meaning as it goes.","if":[]},{"text":"A moral, off its leash. You have never seen one loose before. It is long and low and it flickers — now a hound, now a line of fine italic print running dog-shaped over the frost, its serifs beating like legs, and where it passes, the grass lies down flat as if pressed under a ruler. It circles the oak once, twice, reading the morning. Finding the fable unfinished. Finding nothing shaped right to bite.","if":[]},{"text":"It can smell the cheese you carry. A moral can always smell an unearned ending.","if":[["cheese",true]]},{"text":"It noses the frost where the fable should have died, and cannot make sense of what you did instead. Kindness is not on its list of flavors. Yet.","if":[["kind",true]]},{"text":"Then it lifts its head, and looks at you, and you understand three things all at once, the way you understand teeth.","if":[]},{"text":"One: every fable must end, and every ending must feed a moral. Two: you have unhoused this one, and it will follow you until it lands. Three: it is patient, because it is made of print, and print can wait a hundred years without blinking — but you have only your legs.","if":[]},{"text":"\"Run, fox,\" says Cara from the oak, low and urgent. \"Morals take until nightfall to get their full teeth. If you must be caught, be caught as far from here as you can — and if you can't be caught at all, there is a lamp past the winter wood, on the hill, where the fables get written. Whoever holds the pen owes you a word. \u003cem>Run.\u003c/em>\"","if":[["named-crow",true]]},{"text":"The country lies open around you. East, the racing meadow. Over the ridge, the village that cries wolf. And far off, past everything, the pale line of the margin, where the words stop.","if":[]}],"choices":[{"label":"Make for the racing meadow.","to":"race","if":[],"set":[]},{"label":"Make for the village.","to":"wolf","if":[],"set":[]},{"label":"Run straight for the margin, and out.","to":"margin-road-early","if":[],"set":[]}],"moral":null,"pos":{"x":0.28,"y":0.5}},{"id":"flight","title":null,"body":[{"text":"Out the window, under the fence, into the day you refused — which has, in your absence, been going on without you, badly.","if":[]},{"text":"Behind you the moral pours out of the den door like spilled handwriting and swings its long head across the field. You feel the exact moment it fixes on you: a small cold click, like a pen being capped. A truant fox and an unfed moral. There has never been a clearer case.","if":[]},{"text":"You run. The country opens out around you the way a book opens under a thumb: east, the racing meadow, where a certain race is always about to start. Over the ridge, the village that keeps a boy the way other villages keep a bell. And far off, past all of it, the pale line of the margin, where the words stop and the white begins.","if":[]},{"text":"They say morals take until nightfall to grow their full teeth. They say nothing about what happens after, because the ones who learn are in no condition to add footnotes.","if":[]}],"choices":[{"label":"Make for the racing meadow.","to":"race","if":[],"set":[]},{"label":"Make for the village.","to":"wolf","if":[],"set":[]},{"label":"Run straight for the margin, and out.","to":"margin-road-early","if":[],"set":[]}],"moral":null,"pos":{"x":0.35333333333333333,"y":0.22400000000000003}},{"id":"margin-road-early","title":null,"body":[{"text":"You run west all day, and the country thins as you go.","if":[]},{"text":"It is subtle at first. The trees plant themselves further apart, then further, like a paragraph losing confidence. The birdsong drops words. By afternoon the ground has gone the pale grey of cheap paper and the only things growing are the sorts of plants nobody bothers to describe: a bush, some grass, a flower. Not oak, not vetch, not harebell. Just \u003cem>a flower\u003c/em>, doing the least a flower can do.","if":[]},{"text":"Behind you — never closer, never further — the moral follows at reading pace.","if":[]},{"text":"By dusk you stand at the top of the last low rise, and there it is below you: the margin. The white land. It does not glow and it does not gape. It simply hasn't been written, and looking at it too long is like listening to a held breath.","if":[]},{"text":"Something in you pulls back so hard it nearly sits down. Off to the north, small over the winter wood, a lamp is lit on a hill — somebody keeping late hours over the country's homework.","if":[]}],"choices":[{"label":"Go down to the edge.","to":"margin-approach","if":[],"set":[]},{"label":"Lose your nerve. Cut north, toward the village.","to":"wolf","if":[],"set":[]}],"moral":null,"pos":{"x":0.06,"y":0.316}},{"id":"race","title":null,"body":[{"text":"The racing meadow is mown to velvet and lined with little flags, and it is occupied, as it always is, by the two most tired athletes in the world.","if":[]},{"text":"The tortoise is at the starting stone, pointed down the course like a paperweight with a dream. Thirty yards on, in the shade of the one tree, the hare lies asleep — audibly, theatrically asleep, one ear folded over his eyes, because the script says the hare sleeps and so the hare, who has not been genuinely tired in years, performs his nap with the sour professionalism of a tenor doing his ten-thousandth encore.","if":[]},{"text":"The race is always about to be run here. It is always about to be lost by the fast one. Slow and steady is fed on schedule, every day, rain or shine.","if":[]},{"text":"The tortoise sees you and does not startle; nothing startles a tortoise. \"Fox,\" she says. \"You're off your route.\" Her eyes go past you to the low flickering shape on your trail, and something in her ancient face does the arithmetic. \"Ah,\" she says. \"One of \u003cem>those\u003c/em> mornings.\"","if":[]}],"choices":[{"label":"Wake the hare. Let the fast one win for once.","to":"wake-hare","if":[],"set":["broke-race"]},{"label":"Carry the tortoise to the finish line yourself.","to":"carry-tortoise","if":[],"set":["fraud"]},{"label":"Sit with the tortoise a moment. Ask her how she stands it.","to":"tortoise-talk","if":[],"set":[]}],"moral":null,"pos":{"x":0.20666666666666667,"y":0.316}},{"id":"wake-hare","title":null,"body":[{"text":"You put your muzzle an inch from the hare's folded ear and say, conversationally, \"Wolf.\"","if":[]},{"text":"The hare goes from asleep to a foot in the air without passing through awake. He comes down running — it is all he knows — and because he is pointed up the course, up the course he goes, ears flat, legs like a blur of banjo strings, across the finish line before the tortoise has fully turned her head. He stands there past the flags, heaving, blinking, waiting for the sky to fall.","if":[]},{"text":"The sky does not fall. Something in the meadow tears, quietly, like a page pulled loose along a fold. The moral of the racing meadow — a plump, complacent old sentence that has been fed daily for centuries — finds its supper cancelled.","if":[]},{"text":"And the tortoise starts to laugh. It is slow laughter, geological laughter. \"Four thousand years,\" she wheezes. \"Four thousand years I've won a race I never wanted, to feed a sentence I never liked. Look at him! Look at him \u003cem>go\u003c/em>. Fox, whatever is chasing you — it was worth it.\"","if":[]},{"text":"The hare, for his part, walks back down the course and shakes your paw with both of his, too moved to speak. Behind you, on the ridge, the unhoused moral of the meadow rises and pads down to join the one already on your trail. The pack is now two.","if":[]}],"choices":[{"label":"On, before the light goes.","to":"after-race","if":[],"set":[]}],"moral":null,"pos":{"x":0.20666666666666667,"y":0.40800000000000003}},{"id":"carry-tortoise","title":null,"body":[{"text":"You pick the tortoise up — she hisses like a kettle but does not withdraw, which from a tortoise is consent — and you run the course with her held before you like a stolen cake, and you set her down across the finish line. Done. Fable complete. Slow and steady has won the race in nine seconds flat.","if":[]},{"text":"For a moment you think it has worked. The meadow's moral comes trotting in on schedule, sniffs the result — and stops. It circles the finish line. It looks at the sleeping hare, at the tortoise's dry unwalked footprints, at you. Then it swallows the ending anyway, in one gulp, the way you'd swallow something with a hair in it — and it changes. Its print goes crooked. Its serifs curl like burnt paper. A moral fed on a fraud does not starve; it goes \u003cem>wrong\u003c/em>, and it knows who cooked the meal.","if":[]},{"text":"\"Oh, fox,\" says the tortoise softly, from the finish line she did not cross. \"You meant well. That's the worst part of you people. You always mean well \u003cem>quickly\u003c/em>.\"","if":[]},{"text":"The crooked moral turns its long head toward you, and behind it your own hungry one arrives over the ridge, and the two of them fall in together like old friends with one topic.","if":[]}],"choices":[{"label":"Run.","to":"after-race","if":[],"set":[]}],"moral":null,"pos":{"x":0.06,"y":0.40800000000000003}},{"id":"tortoise-talk","title":null,"body":[{"text":"You sit in the grass beside her, which no one has ever done; spectators here have a stand.","if":[]},{"text":"\"How do you bear it?\" you ask. \"The same race. The same win. Forever.\"","if":[]},{"text":"The tortoise considers this for the better part of a minute. Tortoises pay for their thoughts up front.","if":[]},{"text":"\"I stopped wanting the ribbon,\" she says at last. \"That's all. They can make me run it, and they can make me win it, but the wanting was always mine, so I took it back. Now I just walk. Some days the grass is wet and some days it's dry, and that's the whole of my news, and it's enough.\" Her old eye swivels to you, and to the patient shape on your backtrail. \"You, though. You've still got the wanting. It's coming off you like heat. You want your ending to be \u003cem>yours\u003c/em> so badly the sentences can smell it three fields off.\"","if":[]},{"text":"She is quiet a moment. \"Well,\" she says. \"Good. Somebody in this country ought to want something. Now get up and run, fox; you're making the moral of my story nervous, and it's an old fat thing with a weak heart.\"","if":[]}],"choices":[{"label":"Get up and run.","to":"after-race","if":[],"set":[]}],"moral":null,"pos":{"x":0.13333333333333333,"y":0.40800000000000003}},{"id":"after-race","title":null,"body":[{"text":"East of the meadow the ground climbs, and you climb with it, and the afternoon starts leaning toward the long shadows. Your legs have found the second gear, the one past tired.","if":[]},{"text":"Behind you the pack travels its steady reading pace: your own moral out front, and the meadow's plump one behind it, already leaner for the exercise, its print sharpening with every mile. Morals are the only creatures fattened by fasting.","if":[["broke-race",true]]},{"text":"The crooked one travels differently from the others — sideways, in little rushes, like text being dragged with a slipping thumb. You try not to look at it. Looking at it is like reading in a moving cart.","if":[["fraud",true]]},{"text":"North, the winter wood stands up over the ridge like a held breath full of snow. Beyond it, they say, is the hill with the lamp, where the fables get written. West, always west, the pale line of the margin runs along the world's edge like a straightened horizon.","if":[]},{"text":"The light is going amber. Nightfall is when the teeth come in.","if":[]}],"choices":[{"label":"Into the winter wood.","to":"winter","if":[],"set":[]},{"label":"Enough of other people's stories — make for the margin.","to":"margin-approach","if":[],"set":[]}],"moral":null,"pos":{"x":0.06,"y":0.5}},{"id":"wolf","title":null,"body":[{"text":"The village keeps its boy on the hill above the sheepfold the way lighthouses keep a lamp, and there he is at his post: nine years old, professionally bored, winding up for the day's performance. You can see the shout being assembled in his little chest. There has been no wolf in this district for six generations. That is not the point of him.","if":[]},{"text":"Below in the valley the villagers are pretending not to wait. They mend fences with one ear cocked. The whole hillside is a musical instrument tuned to one note, and the boy is about to play it, and then they will all come running with rakes and be furious, right on schedule, and the moral of the thing — a lean, righteous sentence with LIAR in small caps somewhere along its spine — will get its supper.","if":[]},{"text":"The boy sees you. His mouth, half-open for the shout, hangs there.","if":[]},{"text":"A fox is not a wolf. But a fox, arriving out of breath with a hunting sentence on its trail, is the most interesting thing to reach this hill in living memory.","if":[]}],"choices":[{"label":"Be the wolf. Give the lie some teeth for once.","to":"be-wolf","if":[],"set":["broke-wolf"]},{"label":"Go down and tell the villagers the truth about their boy.","to":"tell-villagers","if":[],"set":[]},{"label":"Climb the rest of the hill and talk to him.","to":"talk-boy","if":[],"set":[]}],"moral":null,"pos":{"x":0.7933333333333334,"y":0.316}},{"id":"be-wolf","title":null,"body":[{"text":"\"Shout,\" you tell the boy. \"Go on. Big one.\"","if":[]},{"text":"He shouts. Oh, he shouts — six generations of institutional shouting are in that boy, \u003cem>WOLF, WOLF, THE WOLF IS COME\u003c/em> — and down in the valley the villagers throw down their mended fences with the joy of people whose bus has finally arrived, and they come boiling up the hill with rakes and dogs and one ceremonial ancient spear.","if":[]},{"text":"And they find a wolf. Or: they find a fox in the long grass doing the finest wolf of its career — back arched, tail flagged, a howl assembled from memory and slander — and the eye sees what the shout has promised it. Screaming. Scattering. A rake abandoned mid-air. You give them a full ninety seconds of wolf before melting into the bracken, and from the bracken you watch the boy get carried down the hill on shoulders, vindicated, decorated, \u003cem>believed\u003c/em> — the first believed boy in the history of this hill.","if":[]},{"text":"Somewhere above the fold, a lean righteous sentence with LIAR along its spine finds its supper cancelled forever, and turns, thin and furious, to join the traffic on your trail.","if":[]},{"text":"The boy catches your eye across the crowd and mouths: \u003cem>thank you.\u003c/em> You have ruined him for honest work, and you have never been surer of a kindness.","if":[]}],"choices":[{"label":"Away, over the ridge, while they're still cheering.","to":"after-village","if":[],"set":[]}],"moral":null,"pos":{"x":0.7933333333333334,"y":0.40800000000000003}},{"id":"tell-villagers","title":null,"body":[{"text":"You trot down into the valley, cool as an invoice, and you find the head-man mending the same fence he has mended since spring, and you tell him the truth.","if":[]},{"text":"\"The boy is lying. He has always been lying. There is no wolf; there has been no wolf here in six generations; the shout is a machine for making all of you come running, and every evening you feed it. I am telling you this because someone should, and everyone who isn't a fox has known it for years and said nothing.\"","if":[]},{"text":"The head-man listens with his whole face. Then he straightens up and calls to the others: \"It's talking!\" — and the truth you told is already gone, before it hit the grass, because it came out of a fox.","if":[]},{"text":"Twice, now. Twice in one day you have told the plain truth and watched it turn to smoke on delivery. The crow at least laughed. These people just look through the words to the fox behind them, and foxes do not say true things, and that is that. It is like being a bell that rings the wrong note no matter what strikes it.","if":[["disbelieved",true]]},{"text":"They chase you off with the mended fence-rail, not unkindly, the way you'd shoo a goose. Up on his hill the boy watches you go, thoughtful. Tonight, right on schedule, he will shout, and they will run, and the lean sentence will eat. You changed nothing. It is somehow the loneliest result a truth can have.","if":[]}],"choices":[{"label":"Over the ridge. Keep moving.","to":"after-village","if":[],"set":[]}],"moral":null,"pos":{"x":0.94,"y":0.40800000000000003}},{"id":"talk-boy","title":null,"body":[{"text":"Up close, the boy is small and his post is smaller: a flat stone worn shiny by generations of bored sitting. He watches you come with the level eyes of someone who talks to sheep all day and has stopped expecting better company.","if":[]},{"text":"\"You're off your route,\" he says. \"Foxes belong at the oak, mornings.\" Then, matter-of-fact: \"Something's hunting you. It's long and it flickers. I watch things all day; I'm good at it.\"","if":[]},{"text":"\"Why do you shout?\" you ask him. \"There's no wolf. There's never been a wolf.\"","if":[]},{"text":"He shrugs, but the shrug is a door coming open. \"When I shout, they come,\" he says simply. \"All of them, at a dead run, just for me. It is the only spell I know. Nobody comes up this hill else.\" He picks at the shiny stone. \"I know what it costs. I know that someday there'll be a real wolf and that's the whole point of me — I'm the boy it happens to, so that everyone can learn. I heard the story. I \u003cem>am\u003c/em> the story.\" He looks up. \"Is it like that for you?\"","if":[]}],"choices":[{"label":"Tell him what you're running from, and why.","to":"boy-quits","if":[],"set":["broke-wolf","kind"]},{"label":"Teach him a better spell than the shout.","to":"better-lie","if":[],"set":["broke-wolf"]}],"moral":null,"pos":{"x":0.8666666666666667,"y":0.40800000000000003}},{"id":"boy-quits","title":null,"body":[{"text":"So you tell him. The oak, the crow, the cheese; the morning you refused to be the fox they printed. The long flickering thing on your trail that is nothing but your own ending, arriving. He listens the way only sentries and children listen — with his whole body, facing the thing.","if":[]},{"text":"\"They can \u003cem>do\u003c/em> that?\" he says. \"You can just — not?\"","if":[]},{"text":"\"It costs,\" you say. \"It's costing me now. It'll cost at nightfall especially. But the wanting stays yours. That's the trade.\"","if":[]},{"text":"The boy looks down at the valley, at all the little people mid-chore with their ears cocked for him, waiting to be summoned and furious. He stands up off the shiny stone. He fills his chest with the biggest shout of his career — and lets it out slowly, silently, through his nose, like a kettle taken off the heat. \"Then I quit,\" he says, wobbly and grinning. \"Let the wolf write his own scenes. I'm going to learn the fiddle.\"","if":[]},{"text":"Somewhere over the fold, a lean righteous sentence feels the ground go out from under its supper, forever. The boy shakes your paw like a small mayor. You have added his moral to your hunting pack and neither of you can stop smiling about it.","if":[]}],"choices":[{"label":"Down the far side of the hill, before the village notices its bell is broken.","to":"after-village","if":[],"set":[]}],"moral":null,"pos":{"x":0.94,"y":0.5}},{"id":"better-lie","title":null,"body":[{"text":"\"The shout works,\" you tell him, \"but it's borrowed. Every time you spend it there's less. Here is a spell that compounds instead: learn their names. All of them. Learn whose fence leans, whose bees are sulking, whose bread came out heavy, and mention it. Not clever — \u003cem>specific\u003c/em>. And when you come down the hill of an evening, come down with news: whose ewe is limping, where the brambles have moved, which cloud is planning what. Watchmen aren't loved for shouting, boy. They're loved for \u003cem>seeing\u003c/em>. Shout WOLF and they come running angry. Say \u003cem>Marta, your northeast post is rotting at the ground line\u003c/em> and they'll come up the hill on their own, and bring bread.\"","if":[]},{"text":"The boy takes this in the way the ground takes rain — slowly, and then all at once, keeping every drop. \"Names,\" he says. \"Seeing. I can do that. I already \u003cem>see\u003c/em> everything; I just only had the one word for it.\"","if":[]},{"text":"He tries it that same evening, as you slip over the ridge: you hear it float up behind you — not WOLF but \u003cem>\"Tomas! Your gate's unlatched and your dog knows it!\"\u003c/em> — and then, unmistakable even at this distance, the sound of a village laughing \u003cem>with\u003c/em> a boy for the first time in six generations. Above the sheepfold, a lean righteous sentence discovers it has been made redundant by customer service.","if":[]}],"choices":[{"label":"Over the ridge, grinning.","to":"after-village","if":[],"set":[]}],"moral":null,"pos":{"x":0.8300000000000001,"y":0.5}},{"id":"after-village","title":null,"body":[{"text":"The far side of the ridge takes the village sounds away all at once, like a lid. Ahead the land climbs toward the winter wood, which stands against the greying sky exactly the way it stands in every story that has ever needed a cold place: close-ranked, dark-barked, its first snow already down and squeaking underfoot.","if":[]},{"text":"Behind you the pack has grown by one lean righteous shape, still muttering LIAR to itself in small caps, professionally unable to decide whether it means the boy, or you, or the villagers, or everyone. Unemployment has not improved its temper.","if":[["broke-wolf",true]]},{"text":"You think about truth as you climb. In your mouth it turns to smoke; in the boy's it turned to riot. The word is not the spell, it seems. The mouth is.","if":[["disbelieved",true]]},{"text":"The cold sharpens. Somewhere past the wood, on its hill, the lamp will be coming on about now. And west, always west at the edge of everything, the margin runs its long white line under the first stars.","if":[]},{"text":"The light is nearly done. Nightfall is when the teeth come in.","if":[]}],"choices":[{"label":"Into the winter wood.","to":"winter","if":[],"set":[]},{"label":"Turn west — make for the margin while any light lasts.","to":"margin-approach","if":[],"set":[]}],"moral":null,"pos":{"x":0.72,"y":0.5}},{"id":"winter","title":null,"body":[{"text":"The wood swallows sound. Snow stands on every branch with the overdone perfection of a stage set, and the cold here is not weather but \u003cem>casting\u003c/em> — this is where the country keeps its winter, so that a certain fable always has somewhere to happen.","if":[]},{"text":"You smell the ants' door before you see it: warm bread, warm grain, a thread of smoke rising from a hill of needles with a hundred shut shutters. And on the doorstep, in the blue snow-light, sits the grasshopper.","if":[]},{"text":"She is wrapped in half a leaf. Her fiddle is under her arm, because she has nothing else to hold. Every evening she knocks, and every evening the ants open the little window and deliver the line the country wrote for them — \u003cem>you sang all summer; very well, now dance\u003c/em> — and shut it again, and the moral of thrift gets its supper, and the grasshopper gets the doorstep. She does not die of it. She is not permitted to die of it; she is needed again tomorrow.","if":[]},{"text":"She watches you come with enormous, patient eyes. \"Evening, fox,\" she says. \"Mind the moral; it's about somewhere. It's always about, suppertime.\" Her voice is thin as her wrists. Behind her the little window glows.","if":[]},{"text":"The cheese you carry chooses this exact moment to weigh something. Half a stolen moon, cool against your teeth. You had been saving it for a hunger of your own.","if":[["cheese",true]]}],"choices":[{"label":"Give her the cheese.","to":"give-cheese","if":[["cheese",true]],"set":["kind","tame-moral"]},{"label":"Teach her to sing for wages — and knock on the ants' door yourself.","to":"sing-wages","if":[],"set":["broke-winter","kind"]},{"label":"Pass by. Night is at your heels.","to":"pass-by","if":[],"set":["passed-by"]}],"moral":null,"pos":{"x":0.94,"y":0.5920000000000001}},{"id":"give-cheese","title":null,"body":[{"text":"You set the moon down on the doorstep in front of her.","if":[]},{"text":"She looks at it for a long time. Creatures who are hungry every night learn not to reach for things; the reaching is how the lesson gets you. But the cheese stays real, and finally her thin hands come out of the leaf-wrap and take it up, and she eats in the smallest bites anything has ever taken, making it last, eyes shut, fiddle across her knees.","if":[]},{"text":"And in the blue air over the doorstep, something \u003cem>arrives\u003c/em> — not the long hunting shape you flinch for, but small: a comma of warm light, curling and uncurling like a new leaf. A moral, newborn. Not the old one of thrift, and not any sentence you've heard fed in this country before. It has no teeth at all yet. It drifts down and settles into the fur of your ruff like an ember that has decided against burning, and its warmth goes all the way through to the bone of your neck.","if":[]},{"text":"\"Oh,\" says the grasshopper softly, around the last of the moon. \"Look at that. They can be \u003cem>born\u003c/em>. All this time they had us thinking they could only be fed.\"","if":[]},{"text":"The old moral of thrift watches from between two trees, and does not approach. Some suppers spoil in front of you.","if":[]}],"choices":[{"label":"On, north, with the small one riding your ruff.","to":"crossroads","if":[],"set":[]}],"moral":null,"pos":{"x":0.5,"y":0.684}},{"id":"sing-wages","title":null,"body":[{"text":"\"Get up,\" you tell her. \"Bring the fiddle. And let a fox do the talking.\"","if":[]},{"text":"You knock. The little window opens on a wall of warm bread-smell and one ant the size of a thumbnail with the eyes of a comptroller. She has her line half-said — \u003cem>you sang all summer\u003c/em> — when you cut in, cool as an invoice: \"Quite. And what did the summer sound like, madam? Anyone can haul grain. It takes an artist to make hauling feel brief. My client sang your whole workforce through the longest summer on record, and you paid her nothing, and called the nothing a moral. Winter is long. Grain is dull. Evenings want filling. My client will sing at your door one hour a night, at one measure of grain per, first payment now, and that isn't charity, madam — it's \u003cem>wages\u003c/em>.\"","if":[]},{"text":"There is a silence from inside the hill, the sound of six hundred thousand ants doing arithmetic at once. Ants understand exactly one language, and you have just spoken it fluently.","if":[]},{"text":"The window opens wider. A measure of grain slides out. From between two trees, the old moral of thrift watches its supper become an \u003cem>invoice\u003c/em>, and goes hungry, and hates you with every serif — and that night, for the first time in the history of winter, the wood fills up with fiddle music that has been \u003cem>paid for\u003c/em>, which is a warmer sound than you would think.","if":[]}],"choices":[{"label":"On, north, through the music.","to":"crossroads","if":[],"set":[]}],"moral":null,"pos":{"x":0.94,"y":0.684}},{"id":"pass-by","title":null,"body":[{"text":"You do not stop. That is the truth of it, and there is no dressing it warmer: night is on your heels with its teeth coming in, and you are one fox with one neck, and you pass the doorstep at a trot, eyes forward, the way everyone passes it, the way the whole country has passed it every winter since winters began.","if":[]},{"text":"\"Evening,\" she says again, behind you. Not reproachful. That is the worst of it — she has no reproach left; the doorstep wore it out of her generations ago. Just \u003cem>evening\u003c/em>, and then, after a moment, the fiddle: thin, unhurried, tuned to the cold, playing you out of earshot the way she plays every night out, because it is what she has instead.","if":[]},{"text":"The song follows you longer than sound should carry in a wood this thick. Long after it is gone, it keeps arriving.","if":[]}],"choices":[{"label":"North. Just — north.","to":"crossroads","if":[],"set":[]}],"moral":null,"pos":{"x":0.72,"y":0.684}},{"id":"crossroads","title":null,"body":[{"text":"Past the wood the land opens into high bare heath, and here the night finishes arriving. It comes up out of the ground the way water comes into a footprint, and with it, behind you, at reading pace, comes everything you have unhoused today.","if":[]},{"text":"You stop on the rise and look back, because a fox should count what's chasing it.","if":[]},{"text":"Your own moral leads — the crow's, the original, first out and leanest, its print gone sharp as wire from the day's fasting.","if":[]},{"text":"Behind it, the meadow's old sentence, no longer plump: the miles have carved it down to its clauses, and it runs with the terrible lightness of something rediscovering its purpose.","if":[["broke-race",true]]},{"text":"And the crooked one, scuttling sideways in little rushes, its serifs curled like burnt paper. The others leave a space around it. Even sentences have standards.","if":[["fraud",true]]},{"text":"The lean righteous one from the village travels at the pack's edge, still muttering LIAR in small caps, spending it on everyone by turns like a coin it can't get rid of.","if":[["broke-wolf",true]]},{"text":"And the old moral of thrift, hindmost, hungriest, its small-print gone nearly transparent — a sentence starving into a rumor of itself, and angrier for every ounce it loses.","if":[["broke-winter",true]]},{"text":"Somewhere under all of it, faint as frost forming, you can still hear the fiddle. It has followed you further than the wood is wide. Some music is a creditor.","if":[["passed-by",true]]},{"text":"And against your neck, the small warm comma stirs and settles, toothless and certain, riding you the way an ember rides a log — patient about the fire it intends to be.","if":[["tame-moral",true]]},{"text":"Their teeth are in now. You can hear it in their gait — nothing hunts as levelly as a finished sentence.","if":[]},{"text":"The heath offers three directions, the way it has been waiting all day to.","if":[]},{"text":"West: the margin, a pale line under the first stars, where the words stop.","if":[]},{"text":"North: the hill, and on it the lamp, where the fables get written.","if":[]},{"text":"Or: here. The oldest option there is. Stop running, turn around, and see what your ending actually is, instead of being told.","if":[]}],"choices":[{"label":"West. The margin. Out of the book entirely.","to":"margin-approach","if":[],"set":[]},{"label":"North. The lamp. Whoever writes this owes you a word.","to":"hill-road","if":[],"set":[]},{"label":"Stop. Turn. Face them.","to":"face","if":[],"set":[]}],"moral":null,"pos":{"x":0.94,"y":0.7760000000000001}},{"id":"face","title":null,"body":[{"text":"You stop.","if":[]},{"text":"It takes the pack a moment to believe it. Pursuit is a machine with two parts, and you have downed tools; the whole engine stumbles. They spill to a halt in a wide crescent on the frost, a parliament of sentences, breathing print, and your own lean one steps out ahead — first in, as is proper. This close, you can read yourself in its flank, the whole doctrine in fine italic: \u003cem>the fox flatters, the fox takes, the fox teaches, let that be a lesson.\u003c/em>","if":[]},{"text":"\"Well,\" you say, and your voice only shakes in the middle. \"Land, then. But land \u003cem>looking at me\u003c/em>. I am not the fox on your flank. I am the fox who checked.\"","if":[]},{"text":"Against your neck, the small warm comma uncurls. It drifts down from your ruff and takes up a position between you and the pack — a curl of light the size of a breath, facing down a crescent of teeth. The pack's leader lowers its long head to read this new thing, and its print stutters. It has never met a moral it couldn't parse.","if":[["tame-moral",true]]}],"choices":[{"label":"Let the small one speak for you.","to":"end-rewrite","if":[["tame-moral",true]],"set":[]},{"label":"Kneel in the frost and let them land.","to":"end-caution","if":[],"set":[]}],"moral":null,"pos":{"x":0.94,"y":0.8680000000000001}},{"id":"margin-approach","title":null,"body":[{"text":"The last mile to the margin is downhill in every sense.","if":[]},{"text":"The words run out gradually, and then all at once. First the land loses its adjectives — plain ground, plain dark, a sky with weather in it that can no longer say which. Then the nouns start to go: you pass a final tree, and behind it a final \u003cem>something\u003c/em>, and after that the ground is just ground the way an unmarked key is a key. The pack's gait falters, back there. Print does not like it here; the white pulls at their serifs like current.","if":[]},{"text":"And then you are at the edge, and there is no cliff and no wall. There is simply the last of the written world — one final stand of frost-stiff grass, one stone, described once, briefly — and beyond it the white.","if":[]},{"text":"Not empty. You were right, that night in the den, telling it to yourself: not empty. \u003cem>Unwritten.\u003c/em> It hums with everything it isn't yet. Looking into it is like looking into a snowfall that hasn't started, into the pause before an answer, into paper the pen hasn't reached — and it does not gape, it \u003cem>waits\u003c/em>, and it is the only thing in the Country of Fables that has never once told you what you are.","if":[]},{"text":"One step. Behind you, teeth. To the north, small on its hill, the lamp.","if":[]},{"text":"And you are carrying, behind everything where the fables can't reach, a name that was given to you for safekeeping. Whatever crosses this line keeps nothing it cannot carry itself — but a name is light. A name would fit in a mouth.","if":[["named-crow",true]]}],"choices":[{"label":"Call her name into the white, and step through.","to":"end-margin-unwritten","if":[["named-crow",true]],"set":[]},{"label":"Step through alone.","to":"end-margin-erased","if":[],"set":[]},{"label":"Turn back — north, toward the lamp.","to":"hill-road","if":[],"set":[]}],"moral":null,"pos":{"x":0.4266666666666667,"y":0.40800000000000003}},{"id":"hill-road","title":null,"body":[{"text":"The hill is longer than it looked, the way hills with lamps on them always are.","if":[]},{"text":"The strange thing happens at the boundary stone, halfway up: the pack stops. All of it, all at once, at an invisible line in the grass — like dogs at the edge of a yard they were beaten in. They pace the line, flickering, and their print seethes, but not one serif crosses it. Whatever holds the pen holds the leash, and they remember it in their type.","if":[]},{"text":"You climb the rest of the way alone, past the line even your own ending will not cross, and the house arrives around the lamp: low, turf-roofed, its one window burning steady amber. Woodsmoke. And under the woodsmoke, a smell that stands your fur on end because it is the smell the moral brought to your den door this morning — ink — but \u003cem>tamer\u003c/em> here, domestic, the wolf's smell on the dog.","if":[]},{"text":"Stacked against the wall, higher than the eaves, cut and split like cordwood: pens. Worn-out pens, thousands of them, each one written down to a stub.","if":[]},{"text":"The door is ajar. It has been ajar, you understand suddenly, for a very long time. This is a door that has given up expecting anyone to have the nerve.","if":[]}],"choices":[{"label":"Knock anyway, and go in.","to":"fabulist","if":[],"set":[]}],"moral":null,"pos":{"x":0.16999999999999998,"y":0.5}},{"id":"fabulist","title":null,"body":[{"text":"Inside is one room, and the room is a desk, and at the desk, in a circle of lamplight, sits the Fabulist.","if":[]},{"text":"You had imagined — what? A giant. A judge. Something with a beard made of beginnings. What sits in the lamplight is a small stooped figure in a shawl of felted grey, neither man nor woman nor animal quite — from one angle a spinster aunt, from another an old heron, from a third just a shadow that has learned to hold a pen. Ink to both elbows. Steel spectacles mended with wire. Before them on the desk lies the Great Ledger of the country, open, and you can see the day's page from the door: \u003cem>OAK — FOX — CROW — CHEESE,\u003c/em> and next to it, in the space where the moral's feeding is recorded, a long, blotted, unhappy dash.","if":[]},{"text":"\"You're the fox,\" the Fabulist says, without looking up. The voice is dry and small, a nib on cheap paper. \"The one who's been conducting a \u003cem>census\u003c/em> out there all day.\" A page turns. \"Sit. You've had a long story. I know. I've been taking it down.\"","if":[]},{"text":"You sit. The fire ticks. The Fabulist reads the day back off the page, in the flat voice of a clerk confirming an order:","if":[]},{"text":"\"\u003cem>Failed to report to the oak.\u003c/em> First line of the day and already off the ruled path. Do you know how long it has been since a fable simply — didn't? The whole morning sat there in the Ledger with its hand out.\"","if":[["truant",true]]},{"text":"\"\u003cem>Oak: fable interrupted; moral unfed; crow — \u003c/em>\" and here the Fabulist stops, and holds the page slantwise to the lamp, as if the entry might be a flaw in the paper. \"In two hundred years I have written THE CROW ten thousand times and the sentence has never once needed to go on. Today it wanted three more lines. I had to \u003cem>think\u003c/em> about a crow. I was rather glad of it.\"","if":[["broke-crow",true]]},{"text":"\"\u003cem>Vineyard: grapes — checked. Sweet.\u003c/em>\" The old head shakes slowly, side to side. \"Two hundred years of SOUR — BY ORDER, fox, and you are the first creature in the history of this country to submit a correction.\"","if":[["tasted-grapes",true]]},{"text":"\"\u003cem>Racing meadow: result achieved by applied fox.\u003c/em>\" The spectacles come down an inch. \"That one curdled as I wrote it. You will have noticed. Meaning is like milk, fox; carried too fast, it turns.\"","if":[["fraud",true]]},{"text":"The Fabulist's eye finds the small warm comma in your ruff, and for a moment the clerk goes out of the old face entirely. \"And \u003cem>that\u003c/em>,\" the Fabulist says quietly, \"is an entry I have no column for. It is new. Nothing in this country has been new since the ink was.\"","if":[["tame-moral",true]]},{"text":"Outside, far down the hill, the pack paces its line in the dark.","if":[]},{"text":"\"I suppose,\" the Fabulist says, and takes off the spectacles, and rubs the dents they've left, \"you've come to ask me \u003cem>why\u003c/em>. They always would, if they ever came. The door's been open two hundred years, fox. You're the first to walk up the hill instead of running down one.\"","if":[]}],"choices":[{"label":"Ask for a new fable — yours.","to":"ask-new","if":[],"set":[]},{"label":"Ask what a Fabulist is \u003cem>for\u003c/em>.","to":"ask-why","if":[],"set":[]}],"moral":null,"pos":{"x":0.06,"y":0.5920000000000001}},{"id":"ask-new","title":null,"body":[{"text":"\"Write me a new one,\" you say. \"You have the pen. Cross out the flattering fox and write — anything. Write the fox who checked. I'll take any fable that hasn't already eaten.\"","if":[]},{"text":"The Fabulist looks at you for a long moment, and the look has a century of tiredness in it, and something else, way at the back, that might be the first pilot light of delight.","if":[]},{"text":"\"That's not how it works,\" the Fabulist says. \"Fables aren't \u003cem>issued\u003c/em>, whatever the country thinks. I don't invent them. I take dictation.\" A stained finger taps the Ledger. \"The country does things, and the doings wear grooves, and the grooves become stories, and I write down the morals when they land. I never once wrote \u003cem>the fox flatters\u003c/em>. Some fox flattered, fox — long before you — and ten thousand mornings wore it into a groove, and my whole work is keeping the ruts legible.\" The spectacles go back on. \"So no. I can't write you a new fable. But you should know that the Ledger has been \u003cem>illegible\u003c/em> since this morning. Every line I set down today came out different from the doing of it. Someone has been out there all day, doing things there is no groove for.\"","if":[]},{"text":"The Fabulist stands, joints going off like green wood, and crosses to the desk drawer.","if":[]}],"choices":[{"label":"Watch the drawer.","to":"desk","if":[],"set":[]}],"moral":null,"pos":{"x":0.06,"y":0.684}},{"id":"ask-why","title":null,"body":[{"text":"\"What are you \u003cem>for\u003c/em>?\" you ask. \"All of it. The grooves, the mornings, the feeding schedule. The crow loses her breakfast ten thousand times so that — what? Who is it all \u003cem>for\u003c/em>?\"","if":[]},{"text":"The Fabulist is quiet so long you think the question has missed. Then:","if":[]},{"text":"\"Readers,\" the Fabulist says, simply. \"You've never met one. They arrive hungry, fox — hungrier than any moral, hungrier than winter — and what they're hungry for is \u003cem>shape\u003c/em>. Lives that mean. Days that add up. They press their faces against this country from a direction you can't point at, and they take away whatever we've made mean something, and it holds them together, a little, out there where nothing is issued at all and the mornings just happen, unsupervised.\" The old head shakes slowly. \"The morals are how the country digests itself for them. It was never meant to hurt the crow. It was meant to \u003cem>matter\u003c/em>, and mattering came out of us crooked, the way everything does when you do it ten thousand times.\"","if":[]},{"text":"The fire ticks. \"I am tired, fox. I have been keeping other creatures' meanings so long I cannot remember mine. And this morning something new came through the grooves like spring water, and it has been the first legible day in a hundred years, and it was \u003cem>you\u003c/em>.\"","if":[]},{"text":"The Fabulist stands, joints going off like green wood, and crosses to the desk drawer.","if":[]}],"choices":[{"label":"Watch the drawer.","to":"desk","if":[],"set":[]}],"moral":null,"pos":{"x":0.28,"y":0.684}},{"id":"desk","title":null,"body":[{"text":"From the drawer the Fabulist takes a pen.","if":[]},{"text":"Not one of the split stubs from the woodpile: a whole one, unworn, its nib bright as first frost. It goes down on the desk between you, on the open Ledger, next to the day's blotted dash, and the lamplight pools in the metal, and the room gets very quiet — the specific quiet of a page before a word.","if":[]},{"text":"\"Here is what I can do,\" the Fabulist says. \"One line. The day's moral is unfed and the Ledger wants its entry, and somebody writes it tonight: that is the one law even I keep. I can hold the pen for you — I have held it for everyone, always, that is what a Fabulist is \u003cem>for\u003c/em>, it turns out — or.\"","if":[]},{"text":"The pause is a door coming open.","if":[]},{"text":"\"Or you hold it. Fox. I have been taking dictation from ruts for two hundred years, and this morning the ruts broke, and it was you that broke them. The Ledger doesn't want my line tonight. It wants yours. Only mind —\" and the old eyes come up over the mended spectacles, suddenly not tired at all — \"whatever you write, you must then \u003cem>live under\u003c/em>. That is what a moral is. It is not a lesson, fox; it never was. It is a roof.\"","if":[]},{"text":"The pen lies on the Ledger, pointing at you like a compass needle that has finally found its business.","if":[["kind",true]]}],"choices":[{"label":"Take the pen.","to":"end-pen","if":[["kind",true]],"set":[]},{"label":"Take the pen.","to":"end-pen","if":[["named-crow",true]],"set":[]},{"label":"Take the pen.","to":"end-pen","if":[["tame-moral",true]],"set":[]},{"label":"Let the Fabulist write it — as it always was written.","to":"end-foxes-end","if":[],"set":[]}],"moral":null,"pos":{"x":0.06,"y":0.7760000000000001}},{"id":"end-classic","title":"The Same Oak, Tomorrow","body":[{"text":"You eat it where she can see, because that is in the script too, and then you deliver the speech. \u003cem>Let that be a lesson, madam: never trust a flatterer.\u003c/em> The words walk out of you in their worn grooves, one after another, smooth as a stair.","if":[]},{"text":"The moral arrives on schedule, glossy and punctual, and feeds, and is satisfied. The morning closes over the field like water over a stone. Somewhere a page turns, contented.","if":[]},{"text":"The crow says nothing. She has nothing left worth saying; that is the arrangement. Tomorrow she will be issued one (1) piece of cheese, and you will be issued your instructions, and the day will repeat until it is learned — and it will never be learned, because it was never the two of you who needed teaching.","if":[]},{"text":"You walk home with the taste of the day in your mouth: cheese, and a little shame. It is, you reflect, a living.","if":[]}],"choices":[],"moral":{"text":"Never trust a flatterer."},"pos":{"x":0.5,"y":0.40800000000000003}},{"id":"end-honest-trick","title":"The Honest Trick","body":[{"text":"You eat it. She dropped it fair — you said so yourself, and you notice how quickly the saying arrived, how smooth the groove was, how ready.","if":[]},{"text":"The moral arrives while you are still swallowing, and it feeds, and its print is odd tonight — the old flattery line crossed with something new and sourer. You told the truth with your whole chest, and the truth worked on the crow exactly the way the lie always had, because it came out of a fox, and the country does not listen to \u003cem>words\u003c/em>. It listens to mouths.","if":[]},{"text":"The crow watches you eat her breakfast. There is no doctrine in her eyes now, only revision: she believed one thing about foxes this morning, and she believes it harder now, and the terrible part is that she is not wrong.","if":[]},{"text":"You warned her. You meant it. She lost the cheese anyway, and you ate it anyway. Somewhere between those two anyways, a fable happened after all.","if":[]}],"choices":[],"moral":{"text":"A truth in a fox's mouth is still a trick."},"pos":{"x":0.72,"y":0.40800000000000003}},{"id":"end-unlived","title":"The Door","body":[{"text":"You open the door.","if":[]},{"text":"The moral does not lunge. It flows in politely, at reading pace, and fills the den the way meaning fills a silence — wall to wall, all at once, nowhere to stand that isn't it. Up close its print is very old and very fine, and you can read the place where your name goes. There has always been a place where your name goes.","if":[]},{"text":"\"I refused,\" you tell it, while it settles. \"Whatever you write, write that I refused.\"","if":[]},{"text":"It writes what it writes: a fox who would not go to the oak, and what became of him, which is this, which is a den with the morning shut out and the story concluded in it. The fable of the fox who refused his fable. The country will tell it as a warning, and the country will be \u003cem>almost\u003c/em> right, and you will not be there to correct the emphasis.","if":[]},{"text":"The last thing is the smell of ink, and the sound, far off, of a crow at an oak, calling once into the empty morning — annoyed, expectant. Waiting for a fox worth warning about.","if":[]}],"choices":[],"moral":{"text":"A story refused is still a story, only lonelier."},"pos":{"x":0.06,"y":0.22400000000000003}},{"id":"end-caution","title":"Where the Teeth Land","body":[{"text":"You kneel in the frost, and they land.","if":[]},{"text":"It is not what you braced for. There is no rending. Teeth made of print do their work at a different depth: they close on the day itself, on the whole shape of what you did, and they \u003cem>pronounce\u003c/em> it, and the pronouncement takes your legs the way cold water does.","if":[]},{"text":"The crooked one lands hardest. It found its flavor at the finish line you carried a tortoise across, and it writes its finding into you at an angle: \u003cem>he meant well, quickly.\u003c/em> You will limp on that sentence forever.","if":[["fraud",true]]},{"text":"They feed. The country needs its cautionary fox, and now it has a fresh one: the fox who ran, sunrise to stars, and was run down on the high heath with the whole day's rebellion still on him like burrs. Mothers of every species will tell it to their unruliest children for a hundred years — \u003cem>and the morals caught him on the heath, and that was that\u003c/em> — and the children, being children, will hear the running, not the catching, and their eyes will go bright, and the mothers will see it, and sigh.","if":[]},{"text":"Which is to say: they will tell of a fox who could not be told anything. As last meals go, you have fed them worse.","if":[]}],"choices":[],"moral":{"text":"Run from your moral and it only grows hungrier."},"pos":{"x":0.06,"y":0.9600000000000001}},{"id":"end-rewrite","title":"The Fox Who Fed the Winter","body":[{"text":"The small one speaks. It has no words yet — it is a comma, an ember, a breath — but neither did you, at first, and look what you turned into: it uncurls between you and the crescent of teeth and simply \u003cem>is what happened\u003c/em>, warm and unarguable. A fox with one cheese and one neck, in a cold wood, at suppertime, choosing.","if":[]},{"text":"The pack's leader reads it. Reads it again. And then, with the shudder of a machine changing gears after ten thousand years in one groove, it lies down. One by one, behind it, the others lie down too, sentences folding themselves into the frost like tired hounds — because morals were never hunting \u003cem>you\u003c/em>, fox. They were hunting a meaning. It is simply that no one in the Country of Fables had cooked them anything new in living memory.","if":[]},{"text":"They feed on it together, all of them, the newborn light going out of the little comma and into the pack like warmth shared down a bloodline. It does not diminish. That is the other thing no one knew: some meals grow by being eaten.","if":[]},{"text":"When it is done, your own moral stands, walks to you, and rests its long head against your shoulder — the fox it was issued to at last worth the print. In the morning the country will wake with a new groove in it, thin as a hair, ready to be walked deeper.","if":[]}],"choices":[],"moral":{"text":"There is more than one way to be clever."},"pos":{"x":0.94,"y":0.9600000000000001}},{"id":"end-margin-unwritten","title":"Two Small Figures, Going","body":[{"text":"\"\u003cem>Cara,\u003c/em>\" you say — into the white, behind everything, where the fables can't reach.","if":[]},{"text":"And the white, which has never once been called anything, answers the only way it can: it lets the name land. Somewhere behind you there is a sound like a page being read backward, and then wingbeats, unhurried, certain, following the name out of the country the way water follows a channel — because you carried it here, and a name is a road, and she built hers herself.","if":[]},{"text":"She settles onto your shoulder at the exact edge of the written world. Neither of you looks back. The pack has stopped at the last stand of grass; print cannot follow where nothing is ruled.","if":[]},{"text":"\"Well, fox,\" she says. \"You minded where you put it down.\"","if":[]},{"text":"You step through together. The white takes you the way morning takes a lamp — not putting anything out; just outshining the need for it. What happens to you there is not recorded, because \u003cem>recorded\u003c/em> is a country you have left; but far behind, on the last page, the grass stays bent where two small figures went, and no moral ever comes to straighten it.","if":[]}],"choices":[],"moral":{"text":"—"},"pos":{"x":0.5,"y":0.5}},{"id":"end-margin-erased","title":"White","body":[{"text":"You step through alone.","if":[]},{"text":"The white is not cruel. You want that understood by someone, and there is no one, so you understand it yourself, hard: \u003cem>it is not cruel.\u003c/em> It is only unwritten, and you are only written, and the two of you cannot both be true in the same place.","if":[]},{"text":"It starts with the description. The russet goes first — not fading, just no longer \u003cem>specified\u003c/em> — then the black stockings of your legs, then the particular angle of your ears that three separate passages once called \u003cem>clever\u003c/em>. You become \u003cem>a fox\u003c/em>, then \u003cem>an animal\u003c/em>, then \u003cem>a shape\u003c/em>, and each is roomier than the last, and none of them hurts. The day's whole chase dissolves into \u003cem>something that happened once\u003c/em>, then into \u003cem>something\u003c/em>, and the relief of it is enormous and you are almost sure it is relief.","if":[]},{"text":"The last thing to go is the wanting — the little engine, the thing the tortoise smelled on you, yours to the end. It looks around at the white, which wants nothing, has never wanted, will never want.","if":[]},{"text":"It sets you down. It goes out the way an ember goes out: certain it will be back.","if":[]}],"choices":[],"moral":{"text":"Beyond the page, nothing needs a moral. Nothing needs a fox, either."},"pos":{"x":0.39,"y":0.5}},{"id":"end-foxes-end","title":"As Foxes Do","body":[{"text":"\"As it always was written, then,\" the Fabulist says — not unkindly, and is that disappointment, way at the back of the old voice, folded and put away like a letter never sent? — and takes up the pen, and writes the day's line in a hand like bird-tracks in frost:","if":[]},{"text":"\u003cem>The fox ran from his moral from sunrise to stars, and was gathered in at last, as foxes are; for foxes end as foxes do.\u003c/em>","if":[]},{"text":"The line settles over you like a roof — that is what a moral is, you understand now, feeling the weight come down gentle and total: a roof. Rain-proof. Horizon-proof. Down the hill the pack lies down at its boundary line, fed by the writing itself, and is satisfied, and so, in a warm and terrible way, are you. It is a good roof. Generations of foxes kept dry under it. Every one of them, you now know, stood once where you are standing, in reach of a pen, and watched another hand take it.","if":[]},{"text":"The Fabulist blots the line and closes the Ledger and looks at you for a long time.","if":[]},{"text":"\"Tomorrow's crow arrives at dawn,\" is all the Fabulist says, at last. \"You know the way to the oak.\"","if":[]},{"text":"You do. Your legs know it the way water knows the way downhill.","if":[]}],"choices":[],"moral":{"text":"Foxes end as foxes do."},"pos":{"x":0.06,"y":0.8680000000000001}},{"id":"end-pen","title":"Your Hand on the Pen","body":[{"text":"The pen is heavier than anything you have carried today — heavier than the moon-coin, heavier than the name — because it is all of them at once: everything that can be set down, pressing upward through the nib against your paw, asking \u003cem>which\u003c/em>.","if":[]},{"text":"The Fabulist turns the Ledger to face you. The day's page, the blotted dash, the space where a moral goes. Down the hill, the pack has gone silent at its line, every serif turned this way. The lamp leans in. The country holds its breath — the oak, the vineyard with its unchecked sign, the meadow, the boy's shiny stone, the doorstep, the white margin at the edge of everything — all of it waiting on one line, yours, the first line in two hundred years that will not come out of a groove.","if":[]},{"text":"\"Mind,\" the Fabulist says softly, one last time, \"you will live under it.\"","if":[]},{"text":"The nib touches down. It makes the sound of frost forming — of a groove beginning — and what you write, fox, in the space where the moral goes, is this:","if":[]}],"choices":[],"moral":{"write":true},"pos":{"x":0.5,"y":0.8680000000000001}},{"id":"secret-sleep","title":"A Morning Off","body":[{"text":"You sleep a little longer.","if":[]},{"text":"The morning, which has seen you before — which has watched you flatter and refuse and trade and run, morning after morning after morning, in every order the day can be dealt — the morning looks in at the den door, and sees a fox who knows every ending the day contains, sleeping in. And it decides, this once, that it never saw you.","if":[]},{"text":"The crow keeps her cheese and eats it herself at noon, unobserved, entirely delicious. The tortoise walks. The boy watches his valley. The grasshopper's fiddle drifts over the snow to an audience of shutters. The moral waits at the oak till dusk and then, embarrassed, eats a beetle and calls it a day. Nothing means anything, anywhere in the country, for one whole rotation of the sun — and the country survives it, easily, the way a held breath survives being let out.","if":[]},{"text":"You dream, in the warm dark, of someone reading. They have been here before too, you feel sure of it — turning the day over and over, hunting all its doors. In the dream you tell them: \u003cem>the doors will keep.\u003c/em> Sleep a little longer.","if":[]}],"choices":[],"moral":{"text":"Even a fox deserves a morning off."},"pos":{"x":0.94,"y":0.132}}],"flags":["broke-crow","broke-race","broke-winter","broke-wolf","cheese","disbelieved","fraud","kind","named-crow","passed-by","tame-moral","tasted-grapes","truant"],"warnings":[]};
+</script>
+<script>
+'use strict';
+// runtime.js — the reader. Ships inlined in dist/index.html with the story
+// data on window.__STORY__. No dependencies, no network, no telemetry:
+// everything the book knows about you stays in your own localStorage.
+(() => {
+  const STORY = window.__STORY__;
+  const byId = new Map(STORY.passages.map((p) => [p.id, p]));
+  const ENDINGS = STORY.passages.filter((p) => p.moral);
+  const SAVE_KEY = 'fables-choice';
+
+  // ---- persistence ---------------------------------------------------------
+  const store = (() => {
+    let data;
+    try { data = JSON.parse(localStorage.getItem(SAVE_KEY)) || {}; } catch { data = {}; }
+    if (data.version !== STORY.meta.version) {
+      // Story text changed since this save: keep the morals collection
+      // (hard-won), drop the mid-run bookmark (stale passage ids).
+      data = { version: STORY.meta.version, endings: data.endings || {}, theme: data.theme, run: null };
+    }
+    data.endings ??= {};
+    const save = () => { try { localStorage.setItem(SAVE_KEY, JSON.stringify(data)); } catch {} };
+    return { data, save };
+  })();
+
+  // ---- run state -----------------------------------------------------------
+  let run = null; // { cur, flags: Set, path: [labels], visited: Set }
+
+  const foundCount = () => Object.keys(store.data.endings).length;
+
+  function newRun() {
+    run = { cur: null, flags: new Set(), path: [], visited: new Set() };
+    if (foundCount() > 0) run.flags.add('@replay');
+  }
+  function persistRun() {
+    store.data.run = run && { cur: run.cur, flags: [...run.flags], path: run.path, visited: [...run.visited] };
+    store.save();
+  }
+  function restoreRun() {
+    const r = store.data.run;
+    if (!r || !byId.has(r.cur)) return false;
+    run = { cur: r.cur, flags: new Set(r.flags), path: r.path || [], visited: new Set(r.visited) };
+    return true;
+  }
+
+  const holds = (ifs) => ifs.every(([flag, want]) => run.flags.has(flag) === want);
+
+  function enabledChoices(p) {
+    const seen = new Set();
+    return p.choices.filter((c) => {
+      if (!holds(c.if)) return false;
+      const key = c.label + ' ' + c.to;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+  }
+
+  // ---- dom helpers ---------------------------------------------------------
+  const app = document.getElementById('app');
+  const el = (tag, attrs = {}, ...children) => {
+    const node = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs)) {
+      if (k === 'html') node.innerHTML = v;
+      else if (k.startsWith('on')) node.addEventListener(k.slice(2), v);
+      else if (v !== null && v !== undefined) node.setAttribute(k, v);
+    }
+    for (const c of children) if (c) node.append(c);
+    return node;
+  };
+
+  const FOX = `<svg viewBox="0 0 100 100" aria-hidden="true"><g fill="currentColor">
+    <path d="M18 12 L40 34 L14 46 Z"/><path d="M82 12 L60 34 L86 46 Z"/>
+    <path d="M50 26 L84 48 L50 94 L16 48 Z"/></g>
+    <g fill="var(--paper)"><circle cx="38" cy="52" r="3.2"/><circle cx="62" cy="52" r="3.2"/>
+    <path d="M50 76 L56 68 L44 68 Z"/></g></svg>`;
+
+  // ---- theme ---------------------------------------------------------------
+  function applyTheme() {
+    const q = new URLSearchParams(location.search).get('theme');
+    const t = q || store.data.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.documentElement.dataset.theme = t;
+  }
+  function toggleTheme() {
+    store.data.theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    store.save();
+    applyTheme();
+  }
+
+  // ---- top bar & modals ----------------------------------------------------
+  let modal = null;
+  function closeModal() { modal?.remove(); modal = null; }
+  function openModal(title, ...content) {
+    closeModal();
+    const card = el('div', { class: 'modal-card', role: 'dialog', 'aria-label': title },
+      el('div', { class: 'modal-head' },
+        el('h2', {}, title),
+        el('button', { class: 'ghost', onclick: closeModal, 'aria-label': 'Close' }, '✕')),
+      ...content);
+    modal = el('div', { class: 'modal-back', onclick: (e) => { if (e.target === modal) closeModal(); } }, card);
+    document.body.append(modal);
+    card.querySelector('button').focus();
+  }
+
+  function bar() {
+    return el('header', { class: 'bar' },
+      el('button', { class: 'ghost bar-title', onclick: () => { closeModal(); renderTitle(); } }, STORY.meta.title),
+      el('nav', { class: 'bar-nav' },
+        el('button', { class: 'ghost', onclick: showMap }, 'map'),
+        el('button', { class: 'ghost', onclick: showMorals }, `morals ${foundCount()} / ${ENDINGS.length}`),
+        el('button', { class: 'ghost', onclick: toggleTheme, 'aria-label': 'Toggle theme' }, '◐'),
+        el('button', { class: 'ghost', onclick: showAbout, 'aria-label': 'About' }, '?')));
+  }
+
+  // ---- screens -------------------------------------------------------------
+  function mount(...content) {
+    app.replaceChildren(bar(), el('main', { class: 'stage' }, ...content));
+  }
+
+  function renderTitle() {
+    run = null;
+    const found = foundCount();
+    const canContinue = !!store.data.run && byId.has(store.data.run.cur);
+    mount(el('section', { class: 'title-screen fade' },
+      el('div', { class: 'fox-mark', html: FOX }),
+      el('h1', {}, STORY.meta.title),
+      el('p', { class: 'subtitle' }, STORY.meta.subtitle || ''),
+      el('p', { class: 'byline' }, `by ${STORY.meta.author}`),
+      el('div', { class: 'title-actions' },
+        canContinue && el('button', { class: 'choice', onclick: () => { restoreRun(); goto(run.cur, true); } },
+          'Pick up where you left off'),
+        el('button', { class: 'choice', onclick: () => { newRun(); goto(STORY.meta.start); } },
+          found ? 'Begin again at the morning' : 'Begin')),
+      found ? el('p', { class: 'found-note' },
+        `You have gathered ${found} of ${ENDINGS.length} morals.`) : null));
+  }
+
+  function goto(id, isRestore = false) {
+    const p = byId.get(id);
+    run.cur = id;
+    run.visited.add(id);
+    persistRun();
+    renderPassage(p, isRestore);
+  }
+
+  function choose(c) {
+    for (const f of c.set) run.flags.add(f);
+    run.path.push(c.label.replace(/<[^>]+>/g, ''));
+    goto(c.to);
+  }
+
+  function renderPassage(p, isRestore) {
+    const body = p.body.filter((b) => holds(b.if))
+      .map((b) => el('p', { html: b.text }));
+
+    const parts = [];
+    if (p.moral) parts.push(renderEnding(p, body));
+    else {
+      const choices = enabledChoices(p);
+      parts.push(
+        el('article', { class: 'passage' }, ...body),
+        el('nav', { class: 'choices', 'aria-label': 'Choices' },
+          ...choices.map((c, i) => el('button', {
+            class: 'choice', onclick: () => choose(c),
+          }, el('span', { class: 'key-hint' }, String(i + 1)), el('span', { html: c.label })))));
+    }
+    mount(el('div', { class: isRestore ? '' : 'fade' }, ...parts));
+    if (!isRestore) app.querySelector('.stage').focus?.();
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }
+
+  // ---- endings -------------------------------------------------------------
+  function recordEnding(p, customText) {
+    const entry = store.data.endings[p.id] || {};
+    if (customText !== undefined) entry.custom = customText;
+    entry.found = true;
+    store.data.endings[p.id] = entry;
+    store.data.run = null; // the run is over; the bookmark burns
+    store.save();
+  }
+
+  function renderEnding(p, body) {
+    const wrap = el('div', {});
+    const writeYourOwn = p.moral.write;
+    if (!writeYourOwn) recordEnding(p);
+
+    wrap.append(
+      el('article', { class: 'passage' },
+        el('p', { class: 'ending-label' }, 'an ending'),
+        el('h2', { class: 'ending-title' }, p.title || 'The End'),
+        ...body));
+
+    if (writeYourOwn) {
+      const prior = store.data.endings[p.id]?.custom || '';
+      const input = el('textarea', {
+        class: 'moral-input', rows: '2', maxlength: '140',
+        placeholder: 'Write the moral you are willing to live under…',
+      });
+      input.value = prior;
+      const done = el('div', {});
+      const commit = () => {
+        const text = input.value.trim();
+        if (!text) { input.focus(); return; }
+        recordEnding(p, text);
+        done.replaceChildren(moralBlock(text), receipt(p));
+        input.closest('.moral-write').remove();
+        refreshBar();
+      };
+      wrap.append(
+        el('div', { class: 'moral-write' },
+          el('div', { class: 'asterism' }, '⁂'),
+          el('p', { class: 'moral-label' }, 'the space where the moral goes'),
+          input,
+          el('button', { class: 'choice', onclick: commit }, 'Set it down')),
+        done);
+    } else {
+      wrap.append(moralBlock(null, p.moral.text), receipt(p));
+    }
+    return wrap;
+  }
+
+  const moralBlock = (plain, html) => el('div', { class: 'moral-block' },
+    el('div', { class: 'asterism' }, '⁂'),
+    el('p', { class: 'moral-label' }, 'moral'),
+    html ? el('p', { class: 'moral-text', html }) : el('p', { class: 'moral-text' }, plain));
+
+  function receipt(p) {
+    const n = foundCount();
+    return el('div', { class: 'receipt' },
+      el('p', {}, `You made ${run.path.length} choice${run.path.length === 1 ? '' : 's'} on the way here.`),
+      el('p', {}, `Morals gathered: ${n} of ${ENDINGS.length}.`),
+      el('div', { class: 'title-actions' },
+        el('button', { class: 'choice', onclick: () => { newRun(); goto(STORY.meta.start); } }, 'Begin again at the morning'),
+        el('button', { class: 'choice', onclick: showMorals }, 'Look over the morals you’ve gathered'),
+        el('button', { class: 'choice', onclick: showMap }, 'See the shape of the country')));
+  }
+
+  const refreshBar = () => document.querySelector('.bar')?.replaceWith(bar());
+
+  // ---- morals collection ---------------------------------------------------
+  function showMorals() {
+    const items = ENDINGS.map((p) => {
+      const got = store.data.endings[p.id];
+      if (!got) return el('li', { class: 'moral-item unfound' },
+        el('span', { class: 'moral-item-title' }, '? ? ?'),
+        el('span', { class: 'moral-item-text' }, 'not yet found'));
+      const text = p.moral.write
+        ? (got.custom ? `“${got.custom}”` : '(you left the space blank)')
+        : null;
+      return el('li', { class: 'moral-item' },
+        el('span', { class: 'moral-item-title' }, p.title),
+        text !== null
+          ? el('span', { class: 'moral-item-text your-hand' }, text)
+          : el('span', { class: 'moral-item-text', html: p.moral.text === '—' ? '<span class="silent">— (the page here is silent)</span>' : p.moral.text }));
+    });
+    openModal(`Morals gathered — ${foundCount()} of ${ENDINGS.length}`,
+      el('ol', { class: 'moral-list' }, ...items),
+      el('p', { class: 'modal-foot' }, 'Every ending must feed a moral. That is the law of the country.'));
+  }
+
+  // ---- map -----------------------------------------------------------------
+  function showMap() {
+    const W = 640, H = 900;
+    const ns = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(ns, 'svg');
+    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    svg.setAttribute('class', 'map-svg');
+    const P = (id) => ({ x: byId.get(id).pos.x * W, y: byId.get(id).pos.y * H });
+    const visited = run ? run.visited : new Set();
+
+    for (const p of STORY.passages) for (const c of p.choices) {
+      const a = P(p.id), b = P(c.to);
+      const path = document.createElementNS(ns, 'path');
+      const mx = (a.x + b.x) / 2;
+      path.setAttribute('d', `M${a.x},${a.y} C${mx},${a.y + 28} ${mx},${b.y - 28} ${b.x},${b.y}`);
+      path.setAttribute('class', 'map-edge' + (visited.has(p.id) && visited.has(c.to) ? ' walked' : ''));
+      svg.append(path);
+    }
+    for (const p of STORY.passages) {
+      const { x, y } = P(p.id);
+      const isEnd = !!p.moral;
+      const found = isEnd && store.data.endings[p.id];
+      const node = document.createElementNS(ns, isEnd ? 'rect' : 'circle');
+      if (isEnd) {
+        node.setAttribute('x', x - 5.5); node.setAttribute('y', y - 5.5);
+        node.setAttribute('width', 11); node.setAttribute('height', 11);
+        node.setAttribute('transform', `rotate(45 ${x} ${y})`);
+      } else {
+        node.setAttribute('cx', x); node.setAttribute('cy', y); node.setAttribute('r', 4.5);
+      }
+      node.setAttribute('class',
+        'map-node' + (visited.has(p.id) ? ' seen' : '') + (found ? ' found' : '') +
+        (run && run.cur === p.id ? ' here' : ''));
+      if (found) {
+        const t = document.createElementNS(ns, 'title');
+        t.textContent = p.title;
+        node.append(t);
+      }
+      svg.append(node);
+    }
+    const seenCount = STORY.passages.filter((p) => visited.has(p.id)).length;
+    openModal('The shape of the country',
+      svg,
+      el('p', { class: 'modal-foot' },
+        `⬦ endings · ● passages — you have walked ${seenCount} of ${STORY.passages.length} this telling. The country keeps its unvisited rooms dark.`));
+  }
+
+  // ---- about ---------------------------------------------------------------
+  function showAbout() {
+    openModal('About this book',
+      el('div', { class: 'about' , html: `
+        <p><em>${STORY.meta.title}</em> is a fable with choices: one morning, ten endings,
+        and the law that every ending must feed a moral.</p>
+        <p>The title misquotes the most famous stage direction in English drama —
+        <em>Exit, pursued by a bear</em> (“The Winter’s Tale”, Act III) — because that is,
+        more or less, what happens to the fox.</p>
+        <p>It was written and built by <strong>Claude Fable 5</strong>, an AI, in July 2026,
+        for a repository named <em>Fable’s Choice</em> — the choice of what to build was the
+        author’s, and the author chose a fable about choosing. The engine, the story format,
+        its compiler, and the checker that proves every moral reachable are all in the
+        <a href="https://github.com/aagaskar/fableschoice">repository</a>, with an authoring
+        guide, so you can write a fable of your own.</p>
+        <p>This page is one self-contained file. It loads nothing, phones no one, and keeps
+        your progress in your own browser only. A reading can end two choices in — the
+        country is dangerous — and finding all ten morals takes considerably more mornings.</p>` }));
+  }
+
+  // ---- keyboard ------------------------------------------------------------
+  document.addEventListener('keydown', (e) => {
+    if (e.target.matches('textarea, input')) return;
+    if (e.key === 'Escape') { closeModal(); return; }
+    if (modal) return;
+    if (e.key >= '1' && e.key <= '9') {
+      const btns = app.querySelectorAll('.choices .choice');
+      const b = btns[Number(e.key) - 1];
+      if (b) b.click();
+    } else if (e.key === 'm') showMap();
+    else if (e.key === 'g') showMorals();
+  });
+
+  // ---- boot ----------------------------------------------------------------
+  applyTheme();
+  const jump = new URLSearchParams(location.search).get('at');
+  if (jump && byId.has(jump)) { newRun(); goto(jump); }
+  else renderTitle();
+})();
+
+</script>
+</body>
+</html>
